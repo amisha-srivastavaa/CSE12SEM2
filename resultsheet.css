@@ -1,0 +1,43 @@
+body {
+    background-color: #481111;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+.resultsheet {
+    background-color: #e4dae4;
+    border: 1px solid #cccccc;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 600px;
+    margin: auto;
+}
+.resultsheet h1 {
+    text-align: center;
+    color: #290c2c;
+}
+.resultsheet table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+.resultsheet table, .resultsheet th, .resultsheet td {
+    border: 1px solid #91b334;
+}
+.resultsheet th, .resultsheet td {
+    padding: 10px;
+    text-align: left;
+}
+.resultsheet th {
+    background-color: #f4858e;
+}
+.resultsheet tr:nth-child(even) {
+    background-color: #e5e6ee;
+}
+.resultsheet .total {
+    font-weight: bold;
+    background-color: #e0e0e0;
+}
+.resultsheet .grade {
+    font-weight: bold;
+    color: #dd2697;
+}
