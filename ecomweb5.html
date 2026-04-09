@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kylie Cosmetics | Collections</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:Inter, sans-serif;
+      background:#fff;
+      color:#111;
+    }
+    a{text-decoration:none;color:inherit}
+
+    /* HEADER */
+    header{
+      background:#fff;
+      border-bottom:1px solid #eee;
+      position:sticky;
+      top:0;
+    }
+    .nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 40px;
+    }
+    .logo{
+      font-family:"Playfair Display", serif;
+      font-size:26px;
+      letter-spacing:2px;
+    }
+    .menu{
+      display:flex;
+      gap:24px;
+      font-size:14px;
+    }
+    .menu a:hover{color:#777}
+
+    /* HERO */
+    .hero{
+      height:45vh;
+      background:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)),
+      url("https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=1600&q=80")
+      center/cover no-repeat;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+    }
+    .hero h1{
+      font-family:"Playfair Display", serif;
+      font-size:42px;
+      letter-spacing:3px;
+    }
+
+    /* SECTION */
+    section{
+      padding:60px 40px;
+    }
+    .title{
+      text-align:center;
+      font-family:"Playfair Display", serif;
+      font-size:30px;
+      margin-bottom:40px;
+    }
+
+    /* COLLECTION GRID */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+    .card{
+      border:1px solid #eee;
+      text-align:center;
+      padding:18px;
+      transition:.3s;
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 10px 25px rgba(0,0,0,.1);
+    }
+    .card img{
+      width:100%;
+      height:300px;
+      object-fit:cover;
+    }
+    .card h3{
+      margin:14px 0 6px;
+      font-size:16px;
+    }
+    .card p{
+      font-size:13px;
+      color:#666;
+    }
+    .card button{
+      margin-top:12px;
+      padding:8px 18px;
+      background:#000;
+      color:#fff;
+      border:none;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .card button:hover{opacity:.85}
+
+    /* FOOTER */
+    footer{
+      background:#f9f9f9;
+      padding:40px;
+      text-align:center;
+      font-size:13px;
+      margin-top:40px;
+    }
+
+    @media(max-width:768px){
+      .nav{padding:16px}
+      .menu{display:none}
+      .hero h1{font-size:30px}
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">KYLIE</div>
+
+    <nav class="menu">
+      <a href="index.html">HOME</a>
+      <a href="shop.html">SHOP</a>
+      <a href="new.html">NEW</a>
+      <a href="collections.html">COLLECTIONS</a>
+      <a href="lips.html">LIPS</a>
+      <a href="eyes.html">EYES</a>
+      <a href="face.html">FACE</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>COLLECTIONS</h1>
+</div>
+
+<!-- COLLECTIONS -->
+<section>
+  <h2 class="title">Featured Collections</h2>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/5c/65/c4/5c65c4f777cd795d938b7db482a0e58e.jpg" alt="Holiday Collection">
+      <h3>Holiday Collection</h3>
+      <p>Limited edition festive glam</p>
+      <button>SHOP COLLECTION</button>
+    </div>
+
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/99/b4/2e/99b42eb7439f49ce03b703b750981cd3.jpg" alt="Birthday Collection">
+      <h3>Birthday Collection</h3>
+      <p>Celebrate with bold beauty</p>
+      <button>SHOP COLLECTION</button>
+    </div>
+
+    <div class="card">
+      <img src="https://i.pinimg.com/736x/56/5a/01/565a01ead5a886fdcabf304d80658c68.jpg">
+      <h3>Summer Collection</h3>
+      <p>Fresh & glowing summer looks</p>
+      <button>SHOP COLLECTION</button>
+    </div>
+
+    <div class="card">
+      <img src="https://i.pinimg.com/1200x/27/92/bd/2792bd95a6ee7730080e634011ff4f80.jpg">
+      <h3>Pink Obsession</h3>
+      <p>Iconic Kylie pink essentials</p>
+      <button>SHOP COLLECTION</button>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 Kylie Cosmetics — Student Project
+</footer>
+
+</body>
+</html>

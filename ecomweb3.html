@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kylie Cosmetics | Face Collection</title>
+
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fff5f8;
+            color: #333;
+        }
+
+        
+        header {
+            background-color: #f7b2c4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            letter-spacing: 2px;
+            color: #3b0a1a;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 16px;
+        }
+
+     
+        .hero {
+            background: linear-gradient(to right, #f7b2c4, #fbd6df);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            margin: auto;
+        }
+
+       
+        .products {
+            padding: 60px 40px;
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #3b0a1a;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #b30059;
+        }
+
+      
+        footer {
+            background-color: #f7b2c4;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+  
+    <header>
+        <h1>KYLIE COSMETICS</h1>
+        <p>Flawless Face Essentials</p>
+    </header>
+
+   
+    <section class="hero">
+        <h2>Perfect Your Base</h2>
+        <p>
+            Create a flawless complexion with lightweight foundations,
+            radiant blushes, sculpting bronzers, and glowing highlighters.
+        </p>
+    </section>
+
+   
+    <section class="products">
+        <h2>Our Face Products</h2>
+
+        <div class="product-grid">
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/35/73/d3/3573d315bd5d7b67759b2deb4f012c36.jpg" alt="Foundation">
+                <h3>Skin Perfecting Foundation</h3>
+                <p>Lightweight foundation with a natural matte finish.</p>
+                <p class="price">₹3,500</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/55/ed/75/55ed756a66234bb9eee7a690a772b23b.jpg" alt="Concealer">
+                <h3>Powder Concealer</h3>
+                <p>Full coverage concealer for a smooth look.</p>
+                <p class="price">₹2,300</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/ca/06/f2/ca06f235212316d8b9f1f45b1ed22a4d.jpg" alt="Blush">
+                <h3>Pressed Blush</h3>
+                <p>Buildable blush for a fresh flush of color.</p>
+                <p class="price">₹2,200</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/c4/9e/ec/c49eecbc7c9354622c55bcc5338d5e59.jpg" alt="Bronzer">
+                <h3>Matte Bronzer</h3>
+                <p>Warm up your complexion with soft matte bronzer.</p>
+                <p class="price">₹2,400</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/d9/80/c7/d980c716e8de3922131ecc9546c2722d.jpg" alt="Highlighter">
+                <h3>Illuminating Highlighter</h3>
+                <p>Glow-enhancing highlighter for radiant skin.</p>
+                <p class="price">₹2,100</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/47/2e/ff/472eff16f37f6f1c0b4a443c18fd11ed.jpg" alt="Face Powder">
+                <h3>Setting Powder</h3>
+                <p>Lightweight powder to lock makeup in place.</p>
+                <p class="price">₹1,900</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/61/5f/3d/615f3dd726ae9934407a41d04b665455.jpg" alt="Face Primer">
+                <h3>Face Primer</h3>
+                <p>Smooth base for long-lasting makeup.</p>
+                <p class="price">₹2,000</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/39/ee/cc/39eecc8f51ca79730666b0dba1129441.jpg" alt="Setting Spray">
+                <h3>Setting Spray</h3>
+                <p>Refresh and set your makeup all day.</p>
+                <p class="price">₹1,800</p>
+            </div>
+
+        </div>
+    </section>
+
+    
+    <footer>
+        <p>© 2026 Kylie Cosmetics | Face Collection</p>
+    </footer>
+
+</body>
+</html>

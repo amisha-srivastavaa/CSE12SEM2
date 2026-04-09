@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kylie Cosmetics | Lip Collection</title>
+
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fff5f8;
+            color: #333;
+        }
+
+        
+        header {
+            background-color: #f7b2c4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            letter-spacing: 2px;
+            color: #3b0a1a;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 16px;
+        }
+
+        
+        .hero {
+            background: linear-gradient(to right, #f7b2c4, #fbd6df);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        
+        .products {
+            padding: 60px 40px;
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #3b0a1a;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #b30059;
+        }
+
+       
+        footer {
+            background-color: #f7b2c4;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+   
+    <header>
+        <h1>KYLIE COSMETICS</h1>
+        <p>Iconic Lip Essentials</p>
+    </header>
+
+    
+    <section class="hero">
+        <h2>The Ultimate Lip Collection</h2>
+        <p>
+            Discover highly pigmented lip kits, velvety matte lipsticks,
+            hydrating oils, and glossy finishes designed for every look.
+        </p>
+    </section>
+
+    
+    <section class="products">
+        <h2>Our Lip Products</h2>
+
+        <div class="product-grid">
+
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/59/0c/be/590cbeeb1f4d06a334ad5b0abadff402.jpg" alt="Matte Lip Kit">
+                <h3>Matte Lip Kit</h3>
+                <p>Long-lasting matte lipstick with matching lip liner.</p>
+                <p class="price">₹2,800</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/d3/5d/63/d35d638ed468d43257b3656cd3154209.jpg" alt="Velvet Lipstick">
+                <h3>Velvet Lipstick</h3>
+                <p>Creamy smooth lipstick with intense color payoff.</p>
+                <p class="price">₹2,200</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/fa/c5/5c/fac55c698e4acf052aa1f6c4783a8726.jpg" alt="High Gloss">
+                <h3>High Gloss</h3>
+                <p>Ultra-shiny, non-sticky gloss for a plump finish.</p>
+                <p class="price">₹1,800</p>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9" alt="Liquid Lipstick">
+                <h3>Liquid Lipstick</h3>
+                <p>Weightless liquid formula with full matte coverage.</p>
+                <p class="price">₹2,500</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/dd/5c/b8/dd5cb8cbb40e03a635f06983fb6c446c.jpg" alt="Lip Butter">
+                <h3>Lip Butter</h3>
+                <p>Hydrating lip butter for soft and nourished lips.</p>
+                <p class="price">₹1,600</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/81/2f/18/812f188dee32a41d7767c1b09bc7cf4c.jpg" alt="Lip Liner">
+                <h3>Precision Lip Liner</h3>
+                <p>Ultra-fine liner for perfectly defined lips.</p>
+                <p class="price">₹1,200</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/7a/b4/bf/7ab4bf6b7b3d24c0c7c70a4c921bec06.jpg" alt="Lip Oil">
+                <h3>Glow Lip Oil</h3>
+                <p>Lightweight oil that adds shine and hydration.</p>
+                <p class="price">₹1,700</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/ce/fe/83/cefe83d8a3601fde5fd4702a6875f235.jpg" alt="Lip Blush">
+                <h3>Lip Blush</h3>
+                <p>Soft-focus tint for a natural, flushed look.</p>
+                <p class="price">₹2,000</p>
+            </div>
+
+        </div>
+    </section>
+
+    
+    <footer>
+        <p>© 2026 Kylie Cosmetics | Lip Collection</p>
+    </footer>
+
+</body>
+</html>

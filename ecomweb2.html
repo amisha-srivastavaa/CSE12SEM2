@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Kylie Cosmetics | Eyes Collection</title>
+
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fff5f8;
+            color: #333;
+        }
+
+        
+        header {
+            background-color: #f7b2c4;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 36px;
+            letter-spacing: 2px;
+            color: #3b0a1a;
+        }
+
+        header p {
+            margin-top: 6px;
+            font-size: 16px;
+        }
+
+        
+        .hero {
+            background: linear-gradient(to right, #f7b2c4, #fbd6df);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 650px;
+            margin: auto;
+        }
+
+       
+        .products {
+            padding: 60px 40px;
+        }
+
+        .products h2 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 40px;
+            color: #3b0a1a;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #b30059;
+        }
+
+       
+        footer {
+            background-color: #f7b2c4;
+            padding: 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    
+    <header>
+        <h1>KYLIE COSMETICS</h1>
+        <p>Iconic Eye Essentials</p>
+    </header>
+
+   
+    <section class="hero">
+        <h2>Define. Sculpt. Glam.</h2>
+        <p>
+            Elevate your eye look with richly pigmented palettes,
+            long-lasting liners, volumizing mascaras, and flawless brow products.
+        </p>
+    </section>
+
+    
+    <section class="products">
+        <h2>Our Eye Products</h2>
+
+        <div class="product-grid">
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/b9/d6/70/b9d670f3c9809a8cf4427bb063a76311.jpg" alt="Eyeshadow Palette">
+                <h3>Eyeshadow Palette</h3>
+                <p>Highly pigmented shades for endless eye looks.</p>
+                <p class="price">₹3,200</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/84/07/91/840791f4f827ef857224b7d59a39d76c.jpg" alt="Mascara">
+                <h3>Volumizing Mascara</h3>
+                <p>Buildable volume and intense black finish.</p>
+                <p class="price">₹2,100</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/ba/2d/15/ba2d15b5d2667e195138d9f92294e61f.jpg" alt="Eyeliner">
+                <h3>Liquid Eyeliner</h3>
+                <p>Smudge-proof liner with precision tip.</p>
+                <p class="price">₹1,700</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/b4/15/bd/b415bd2b7d4841f9e7607553b22da944.jpg" alt="Gel Eyeliner">
+                <h3>Gel Eyeliner</h3>
+                <p>Ultra-smooth gel liner for bold definition.</p>
+                <p class="price">₹1,900</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/de/e9/b6/dee9b6ac20f2d163313c5a18cdbc5284.jpg" alt="Brow Kit">
+                <h3>Brow Kit</h3>
+                <p>Everything you need for perfect brows.</p>
+                <p class="price">₹2,600</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/52/b0/98/52b0988aa0198bec312e3d69c2e61eb6.jpg" alt="Brow Pencil">
+                <h3>Brow pencil</h3>
+                <p>Fine-tip pencil for natural brow strokes.</p>
+                <p class="price">₹1,400</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/1200x/3b/a6/13/3ba6136d0630d672f6b6404551b66496.jpg" alt="False Lashes">
+                <h3>False Lashes</h3>
+                <p>Lightweight lashes for dramatic volume.</p>
+                <p class="price">₹1,800</p>
+            </div>
+
+            <div class="card">
+                <img src="https://i.pinimg.com/736x/42/1e/62/421e628596d4978698a4856c5b902990.jpg" alt="Eye Primer">
+                <h3>Eye Primer</h3>
+                <p>Smooth base for long-lasting eyeshadow.</p>
+                <p class="price">₹1,600</p>
+            </div>
+
+        </div>
+    </section>
+
+   
+    <footer>
+        <p>© 2026 Kylie Cosmetics | Eyes Collection</p>
+    </footer>
+
+</body>
+</html>
