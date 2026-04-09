@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Assistant', sans-serif;
+}
+
+/* Header Styling */
+header {
+    height: 80px;
+    background: #fff;
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    height: 100%;
+    padding: 0 2rem;
+}
+
+.logo {
+    width: 50px;
+    margin-right: 2rem;
+}
+
+.main-nav ul {
+    display: flex;
+    list-style: none;
+}
+
+.main-nav ul li a {
+    text-decoration: none;
+    color: #282c3f;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 28px 15px;
+    display: block;
+    border-bottom: 4px solid transparent;
+}
+
+.main-nav ul li a:hover {
+    border-bottom: 4px solid #ff3f6c; /* Myntra Signature Pink */
+}
+
+/* Search Bar */
+.search-bar {
+    flex-grow: 1;
+    margin: 0 2rem;
+    position: relative;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 10px 40px;
+    background: #f5f5f6;
+    border: 1px solid #f5f5f6;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* Product Section */
+.container {
+    padding: 2rem 5%;
+}
+
+.section-title {
+    font-size: 24px;
+    color: #3e4152;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+/* CSS Grid for Products */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+
+
+.product-card {
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 10px;
+}
+
+.product-info h4 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #282c3f;
+}
+
+.product-info p {
+    font-size: 14px;
+    color: #535766;
+    margin: 5px 0;
+}
+
+.price {
+    font-size: 14px;
+}
+
+.discount-price {
+    font-weight: 700;
+    color: #282c3f;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #7e818c;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.offer {
+    color: #ff905a;
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.banner img {
+    width: 100%;
+    display: block;
+}

@@ -1,0 +1,76 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    color: #ff6b6b;
+    font-size: 2.5rem;
+}
+
+/* The Grid System */
+.gallery-container {
+    display: grid;
+    /* This creates 3 equal columns that adjust automatically */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Individual Card Styling */
+.pet-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden; /* Keeps the zoomed image inside the borders */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-10px); /* Lifts the card up */
+}
+
+/* Image Styling */
+.pet-card img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover; /* Prevents image stretching */
+    transition: transform 0.5s ease;
+}
+
+.pet-card:hover img {
+    transform: scale(1.1); /* Zooms the photo slightly */
+}
+
+/* Caption Styling */
+.caption {
+    padding: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: #444;
+}
+.about-text {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 15px;
+    line-height: 1.8; /* Improves readability */
+    color: #444;
+    text-align: justify; /* Makes it look like a textbook/article */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.about-text h2 {
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    text-align: center;
+}
