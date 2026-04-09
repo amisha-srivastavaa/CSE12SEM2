@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple JS Calculator</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+        .result-box { border: 1px solid #ccc; padding: 15px; width: 300px; }
+    </style>
+</head>
+<body>
+
+    <h2>JavaScript Calculator</h2>
+    <div class="result-box">
+        <script>
+            // Taking user input via prompt boxes
+            // parseFloat ensures we can handle decimal numbers accurately
+            let n1 = parseFloat(prompt("Enter the first number:"));
+            let n2 = parseFloat(prompt("Enter the second number:"));
+
+            // Check if inputs are valid numbers
+            if (isNaN(n1) || isNaN(n2)) {
+                document.write("<p style='color:red;'>Error: Please enter valid numbers.</p>");
+            } else {
+                // Performing operations
+                let sum = n1 + n2;
+                let diff = n1 - n2;
+                let prod = n1 * n2;
+
+                // Displaying results on the webpage
+                document.write("<strong>Number 1:</strong> " + n1 + "<br>");
+                document.write("<strong>Number 2:</strong> " + n2 + "<br><hr>");
+                document.write("Sum: " + sum + "<br>");
+                document.write("Difference: " + diff + "<br>");
+                document.write("Product: " + prod);
+            }
+        </script>
+    </div>
+
+</body>
+</html>
