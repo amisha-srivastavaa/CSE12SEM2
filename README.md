@@ -1,4 +1,4 @@
-# B.Tech 2nd Semester Web Design Portfolio 🚀
+# B.Tech 2nd Semester Web Design Portfolio 
 
 Hi there! Welcome to my repository for the 2nd Semester Web Design course. 
 
@@ -6,7 +6,7 @@ I created this repo to showcase everything I've learned over the semester, from 
 
 ---
 
-## 🛠️ What's Inside?
+##  What's Inside?
 
 This repository is split into two main parts: my **4 Major Projects** and the **12 Core Experiments** required for the coursework.
 
@@ -39,7 +39,7 @@ These folders cover specific topics we learned in class:
 
 ---
 
-## 💻 How to Run This Stuff
+##  How to Run This Stuff
 
 **For the HTML/JS/CSS experiments:**
 Just double-click the `index.html` file in any folder (or the main root folder) to view it in your browser. No server needed.
