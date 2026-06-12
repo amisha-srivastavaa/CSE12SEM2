@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSE 2nd Semester Web Design Projects</title>
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -30,35 +28,34 @@
         }
 
         .hero-section {
-            padding: 100px 0 60px;
+            padding: 80px 0 40px;
             text-align: center;
         }
 
         .hero-title {
             font-weight: 800;
-            font-size: 3.5rem;
+            font-size: 3rem;
             background: linear-gradient(135deg, var(--text-color), #94a3b8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
 
-        .hero-subtitle {
-            font-weight: 300;
-            color: #94a3b8;
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto 40px;
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--card-border);
         }
 
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 12px;
+            padding: 20px;
             height: 100%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
             text-decoration: none;
             color: inherit;
             display: flex;
@@ -66,131 +63,71 @@
         }
 
         .project-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
             border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             color: inherit;
         }
 
         .project-number {
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             color: var(--accent-1);
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .project-title {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
-            margin-bottom: 15px;
-        }
-
-        .project-desc {
-            color: #cbd5e1;
-            font-weight: 300;
-            font-size: 0.95rem;
-            margin-bottom: 25px;
-            flex-grow: 1;
-        }
-
-        .tech-stack {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
+            margin-bottom: 10px;
         }
 
         .tech-badge {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.65rem;
             color: #94a3b8;
-        }
-
-        .btn-custom {
-            background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-            border: none;
-            color: white;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: opacity 0.3s ease;
-        }
-
-        .btn-custom:hover {
-            opacity: 0.9;
-            color: white;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="container pb-5">
         <div class="hero-section">
-            <h1 class="hero-title">B.Tech Web Design Portfolio</h1>
-            <p class="hero-subtitle">A comprehensive showcase of web technologies learned during the 2nd semester, ranging from foundational UI to full-stack applications.</p>
-            <a href="https://github.com" target="_blank" class="btn btn-custom">View Repository</a>
+            <h1 class="hero-title">Web Design Projects Portfolio</h1>
+            <p class="lead text-muted">A complete collection of all semester projects and 12 core experiments.</p>
         </div>
 
-        <div class="row g-4 pb-5">
-            <!-- Project 1 -->
-            <div class="col-md-6 col-lg-3">
-                <a href="bootstrap-website/index.html" class="project-card">
-                    <div class="project-number">Project 01</div>
-                    <h2 class="project-title">Corporate Landing Page</h2>
-                    <p class="project-desc">A fully responsive, professional landing page built with advanced Bootstrap 5 grid and components.</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">HTML5</span>
-                        <span class="tech-badge">Bootstrap 5</span>
-                    </div>
-                </a>
-            </div>
+        <h2 class="section-title">The 12 Core Experiments</h2>
+        <div class="row g-3">
+            <div class="col-md-4 col-lg-3"><a href="exp1-bootstrap-grid/index.html" class="project-card"><div class="project-number">Exp 1</div><h3 class="project-title">Bootstrap Grid</h3><div><span class="tech-badge">Bootstrap</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp2-bootstrap-components/index.html" class="project-card"><div class="project-number">Exp 2</div><h3 class="project-title">Bootstrap Components</h3><div><span class="tech-badge">Bootstrap</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp3-tailwind-fitlife/index.html" class="project-card"><div class="project-number">Exp 3</div><h3 class="project-title">Tailwind CSS FitLife</h3><div><span class="tech-badge">Tailwind</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp4-js-marks-calculator/index.html" class="project-card"><div class="project-number">Exp 4</div><h3 class="project-title">JS Marks Calculator</h3><div><span class="tech-badge">JavaScript</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp5-js-employee-records/index.html" class="project-card"><div class="project-number">Exp 5</div><h3 class="project-title">JS Employee Records</h3><div><span class="tech-badge">JavaScript</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp6-js-events/index.html" class="project-card"><div class="project-number">Exp 6</div><h3 class="project-title">JS Events & DOM</h3><div><span class="tech-badge">JavaScript</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp7-react-student-props/README.md" class="project-card"><div class="project-number">Exp 7</div><h3 class="project-title">React Props</h3><div><span class="tech-badge">React</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp8-react-usestate-counter/README.md" class="project-card"><div class="project-number">Exp 8</div><h3 class="project-title">React useState</h3><div><span class="tech-badge">React</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp9-react-form-validation/README.md" class="project-card"><div class="project-number">Exp 9</div><h3 class="project-title">React Form Val.</h3><div><span class="tech-badge">React</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp10-java-bank-oop/README.md" class="project-card"><div class="project-number">Exp 10</div><h3 class="project-title">Java OOP Bank</h3><div><span class="tech-badge">Java</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp11-springboot-basic-api/README.md" class="project-card"><div class="project-number">Exp 11</div><h3 class="project-title">Spring Boot Basic</h3><div><span class="tech-badge">Spring Boot</span></div></a></div>
+            <div class="col-md-4 col-lg-3"><a href="exp12-springboot-crud-employee/README.md" class="project-card"><div class="project-number">Exp 12</div><h3 class="project-title">Spring Boot CRUD</h3><div><span class="tech-badge">Spring Boot</span></div></a></div>
+        </div>
 
-            <!-- Project 2 -->
-            <div class="col-md-6 col-lg-3">
-                <a href="javascript-projects/dom-manipulation.html" class="project-card">
-                    <div class="project-number">Project 02</div>
-                    <h2 class="project-title">Interactive JS Features</h2>
-                    <p class="project-desc">Vanilla JavaScript projects featuring DOM manipulation, LocalStorage, and REST API data fetching.</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">JavaScript</span>
-                        <span class="tech-badge">CSS3</span>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Project 3 -->
-            <div class="col-md-6 col-lg-3">
-                <a href="react-app/README.md" class="project-card">
-                    <div class="project-number">Project 03</div>
-                    <h2 class="project-title">Student Dashboard</h2>
-                    <p class="project-desc">A modern Single Page Application built with React. Features state management and dynamic routing.</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">React</span>
-                        <span class="tech-badge">Vite</span>
-                    </div>
-                </a>
-            </div>
-
-            <!-- Project 4 -->
-            <div class="col-md-6 col-lg-3">
-                <a href="springboot-api/README.md" class="project-card">
-                    <div class="project-number">Project 04</div>
-                    <h2 class="project-title">Student Management API</h2>
-                    <p class="project-desc">A robust backend REST API built with Java and Spring Boot, utilizing an H2 database.</p>
-                    <div class="tech-stack">
-                        <span class="tech-badge">Spring Boot</span>
-                        <span class="tech-badge">Java</span>
-                    </div>
-                </a>
-            </div>
+        <h2 class="section-title mt-5">Previous Major Projects</h2>
+        <div class="row g-3">
+            <div class="col-md-6"><a href="bootstrap-website/index.html" class="project-card"><div class="project-number">Project 1</div><h3 class="project-title">Corporate Landing Page</h3><div><span class="tech-badge">Bootstrap 5</span></div></a></div>
+            <div class="col-md-6"><a href="javascript-projects/dom-manipulation.html" class="project-card"><div class="project-number">Project 2</div><h3 class="project-title">Interactive JS Features</h3><div><span class="tech-badge">JS</span></div></a></div>
+            <div class="col-md-6"><a href="react-app/README.md" class="project-card"><div class="project-number">Project 3</div><h3 class="project-title">Student Dashboard</h3><div><span class="tech-badge">React</span></div></a></div>
+            <div class="col-md-6"><a href="springboot-api/README.md" class="project-card"><div class="project-number">Project 4</div><h3 class="project-title">Student Management API</h3><div><span class="tech-badge">Spring Boot</span></div></a></div>
         </div>
     </div>
-
-    <!-- Bootstrap JS (Optional for landing page, but good practice) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

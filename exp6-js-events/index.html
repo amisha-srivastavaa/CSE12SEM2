@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Events & DOM Manipulation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Event Explorer</h1>
+            <p>Experiment 6: Interacting with the DOM via JS Events</p>
+            <a href="../index.html" class="back-link">Exit</a>
+        </header>
+
+        <div class="workspace">
+            <div class="input-area">
+                <label for="messageInput">Enter a message:</label>
+                <!-- onchange event will be attached in JS -->
+                <input type="text" id="messageInput" placeholder="Type something cool here...">
+                
+                <div class="action-buttons">
+                    <!-- onclick event attached directly for demonstration (though JS is better practice) -->
+                    <button onclick="displayMessage()" class="btn btn-primary">Display (onclick)</button>
+                    <!-- onmouseover attached in JS -->
+                    <button id="hoverBtn" class="btn btn-secondary">Hover Me (onmouseover)</button>
+                    <!-- addEventListener attached in JS -->
+                    <button id="clearBtn" class="btn btn-danger">Clear (addEventListener)</button>
+                </div>
+            </div>
+
+            <div class="output-area">
+                <h3>Live Output:</h3>
+                <div id="outputDisplay" class="output-box">
+                    <p id="messageText" class="placeholder-text">Waiting for interaction...</p>
+                </div>
+                <div id="infoDisplay" class="info-box">
+                    Length: <span id="charCount">0</span> characters
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

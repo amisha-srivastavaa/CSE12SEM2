@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Marks Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Marks Calculator</h1>
+            <p>Experiment 4: JS Variables, Conditions & Loops</p>
+            <a href="../index.html" class="back-btn">Exit</a>
+        </header>
+
+        <main>
+            <div class="setup-section" id="setupSection">
+                <label for="numSubjects">Enter number of subjects:</label>
+                <input type="number" id="numSubjects" min="1" max="10" placeholder="e.g., 5">
+                <button id="startBtn">Enter Marks</button>
+                <div id="setupError" class="error hidden">Please enter a valid number (1-10).</div>
+            </div>
+
+            <div class="input-section hidden" id="inputSection">
+                <h2 id="inputHeader">Enter marks out of 100</h2>
+                <div id="marksInputsContainer"></div>
+                <button id="calculateBtn">Calculate Results</button>
+                <div id="inputError" class="error hidden">Please ensure all marks are between 0 and 100.</div>
+            </div>
+
+            <div class="result-section hidden" id="resultSection">
+                <h2>Final Results</h2>
+                <div class="result-card">
+                    <div class="result-row"><span>Total Marks:</span> <strong id="resTotal"></strong></div>
+                    <div class="result-row"><span>Average:</span> <strong id="resAvg"></strong></div>
+                    <div class="result-row"><span>Grade:</span> <strong id="resGrade" class="grade-badge"></strong></div>
+                    <div class="result-row"><span>Status:</span> <strong id="resStatus"></strong></div>
+                </div>
+                <button id="resetBtn" class="secondary-btn">Calculate Another</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

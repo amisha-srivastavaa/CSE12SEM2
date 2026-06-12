@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitLife - Tailwind CSS Landing Page</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#ef4444', // Red-500 for fitness theme
+                            600: '#dc2626',
+                            900: '#7f1d1d'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- Header Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center py-4">
+                <div class="flex justify-between w-full md:w-auto items-center">
+                    <a href="#" class="text-2xl font-black text-brand-600 tracking-tighter uppercase">FitLife.</a>
+                    <!-- Mobile menu button (visual only for this exp) -->
+                    <button class="md:hidden text-gray-500 hover:text-gray-700">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Nav Links: vertical on mobile (hidden usually, but shown block here for demo), horizontal on md -->
+                <nav class="hidden md:flex space-x-8 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-900 hover:text-brand-500 font-medium transition-colors">Home</a>
+                    <a href="#programs" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Programs</a>
+                    <a href="#" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Trainers</a>
+                    <a href="#" class="text-gray-600 hover:text-brand-500 font-medium transition-colors">Contact</a>
+                    <a href="../index.html" class="text-gray-400 hover:text-gray-600 font-medium ml-4 border-l pl-4">Exit</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20 lg:py-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center"></div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6">
+                    Transform Your Body.<br>
+                    <span class="text-brand-500">Transform Your Life.</span>
+                </h1>
+                <p class="mt-4 text-lg sm:text-xl text-gray-300 mb-8 max-w-2xl">
+                    Join FitLife today and get access to world-class trainers, state-of-the-art equipment, and personalized diet plans to hit your goals faster.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#" class="bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transform transition hover:scale-105 text-center">
+                        Join Now
+                    </a>
+                    <a href="#programs" class="bg-white hover:bg-gray-100 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg transition text-center">
+                        View Programs
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Programs Section -->
+    <section id="programs" class="py-16 bg-gray-50 flex-grow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">Our Premium Programs</h2>
+                <p class="mt-4 text-lg text-gray-500">Choose the path that fits your fitness journey.</p>
+            </div>
+
+            <!-- Responsive Grid: 1 col mobile, 2 col md, 3 col lg -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-100">
+                    <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-400">
+                        <span class="font-medium">Image: Dumbbells</span>
+                    </div>
+                    <div class="p-8">
+                        <div class="uppercase tracking-wide text-sm text-brand-500 font-bold mb-1">Strength</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Weight Training</h3>
+                        <p class="text-gray-600 mb-6">Build muscle and increase your metabolism with our comprehensive free weights and machine area.</p>
+                        <a href="#" class="text-brand-500 hover:text-brand-600 font-semibold flex items-center">
+                            Learn more
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-100">
+                    <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-400">
+                        <span class="font-medium">Image: Yoga Mat</span>
+                    </div>
+                    <div class="p-8">
+                        <div class="uppercase tracking-wide text-sm text-blue-500 font-bold mb-1">Flexibility</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Yoga Classes</h3>
+                        <p class="text-gray-600 mb-6">Improve your core strength, flexibility, and mental peace with expert-led daily yoga sessions.</p>
+                        <a href="#" class="text-blue-500 hover:text-blue-600 font-semibold flex items-center">
+                            Learn more
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-100">
+                    <div class="h-48 bg-gray-200 flex items-center justify-center text-gray-400">
+                        <span class="font-medium">Image: Healthy Meal</span>
+                    </div>
+                    <div class="p-8">
+                        <div class="uppercase tracking-wide text-sm text-green-500 font-bold mb-1">Nutrition</div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3">Diet Plans</h3>
+                        <p class="text-gray-600 mb-6">Abs are made in the kitchen. Get a customized diet plan crafted by our certified nutritionists.</p>
+                        <a href="#" class="text-green-500 hover:text-green-600 font-semibold flex items-center">
+                            Learn more
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4 uppercase tracking-wider">FitLife.</h4>
+                <p class="text-sm">Empowering you to live a healthier, happier life through fitness and nutrition.</p>
+            </div>
+            <div>
+                <h4 class="text-white text-lg font-bold mb-4">Contact</h4>
+                <ul class="text-sm space-y-2">
+                    <li>123 Fitness Blvd, Gym City</li>
+                    <li>Phone: (555) 123-4567</li>
+                    <li>Email: contact@fitlife.edu</li>
+                </ul>
+            </div>
+            <div class="flex flex-col items-center md:items-start">
+                <h4 class="text-white text-lg font-bold mb-4">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-white transition">Facebook</a>
+                    <a href="#" class="hover:text-white transition">Instagram</a>
+                    <a href="#" class="hover:text-white transition">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8 pt-8 border-t border-gray-800 text-center text-sm">
+            &copy; 2026 FitLife Experiment 3. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

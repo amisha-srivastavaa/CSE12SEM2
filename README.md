@@ -1,84 +1,30 @@
 # B.Tech 2nd Semester Web Design Project Portfolio
 
-Welcome to the comprehensive repository for the 2nd Semester Web Design coursework. This project is a curated collection of web applications demonstrating progression from fundamental UI design to full-stack development.
+Welcome to the comprehensive repository for the 2nd Semester Web Design coursework. This repository contains both the 4 major projects and the 12 core experiments.
 
-## Table of Contents
-1. [Project 1: Bootstrap Responsive Website](#project-1-bootstrap-responsive-website)
-2. [Project 2: JavaScript Interactive Features](#project-2-javascript-interactive-features)
-3. [Project 3: React Application](#project-3-react-application)
-4. [Project 4: Spring Boot REST API](#project-4-spring-boot-rest-api)
+## Core Experiments (1-12)
 
----
+1. **`exp1-bootstrap-grid/`**: Responsive grid layout using Bootstrap 5.
+2. **`exp2-bootstrap-components/`**: TechStore UI using Bootstrap components (Navbar, Cards, Modals).
+3. **`exp3-tailwind-fitlife/`**: Mobile-first responsive landing page using Tailwind CSS via CDN.
+4. **`exp4-js-marks-calculator/`**: JavaScript logic (loops, conditions) calculating grades dynamically.
+5. **`exp5-js-employee-records/`**: JavaScript Objects/Arrays to filter and aggregate employee data.
+6. **`exp6-js-events/`**: JavaScript DOM events (onclick, onmouseover) changing UI without reload.
+7. **`exp7-react-student-props/`**: React reusable components using Props.
+8. **`exp8-react-usestate-counter/`**: React state management with `useState`.
+9. **`exp9-react-form-validation/`**: React form with inline validation.
+10. **`exp10-java-bank-oop/`**: Core Java OOP (Inheritance, Abstraction, Encapsulation).
+11. **`exp11-springboot-basic-api/`**: Basic Spring Boot REST Controller.
+12. **`exp12-springboot-crud-employee/`**: Full Spring Boot CRUD API with Spring Data JPA & H2 Database.
 
-## Getting Started
+## Major Projects
 
-To explore the projects, you can open the root `index.html` file in any modern web browser. It serves as a unified landing page that links to all the individual sub-projects.
+1. **`bootstrap-website/`**: Corporate landing page built with Bootstrap 5.
+2. **`javascript-projects/`**: Vanilla JS To-Do list and REST API fetcher.
+3. **`react-app/`**: Student Dashboard Single Page Application built with React.
+4. **`springboot-api/`**: Comprehensive Spring Boot backend for Student Management.
 
-### Screenshots
-*(Placeholders for project screenshots)*
-- `demo/landing-page.png`
-- `demo/react-dashboard.png`
-- `demo/api-tests.png`
-
----
-
-## Project 1: Bootstrap Responsive Website
-**Directory:** `bootstrap-website/`
-
-A professional, corporate-style landing page built entirely with HTML5 and Bootstrap 5. 
-
-**Key Features:**
-- Fully responsive grid layout.
-- Implementation of Bootstrap components (Navbar, Cards, Modals).
-- Custom CSS overrides for a unique, polished aesthetic.
-
-**How to run:**
-Simply open `bootstrap-website/index.html` in your browser.
-
----
-
-## Project 2: JavaScript Interactive Features
-**Directory:** `javascript-projects/`
-
-This section focuses on Vanilla JavaScript to add interactivity and handle asynchronous data.
-
-**Key Features:**
-- **To-Do List (`dom-manipulation.html`):** Demonstrates DOM manipulation, event handling, and data persistence using the browser's `localStorage`.
-- **Data Fetcher (`api-fetch.html`):** Demonstrates asynchronous JavaScript (`fetch`, `async/await`) by retrieving and rendering data from a public REST API (JSONPlaceholder).
-
-**How to run:**
-Open either `dom-manipulation.html` or `api-fetch.html` in your browser.
-
----
-
-## Project 3: React Application
-**Directory:** `react-app/`
-
-A Single Page Application (SPA) serving as a Student Management Dashboard frontend.
-
-**Key Features:**
-- Built using React (initialized via Vite).
-- Functional components and Hooks (`useState`, `useEffect`).
-- Dynamic rendering of lists and form handling.
-
-**How to run:**
-1. Navigate into the directory: `cd react-app`
-2. Install dependencies: `npm install`
-3. Start the development server: `npm run dev`
-
----
-
-## Project 4: Spring Boot REST API
-**Directory:** `springboot-api/`
-
-The backend component of the architecture, providing a RESTful API for Student Management.
-
-**Key Features:**
-- Built with Java and Spring Boot.
-- CRUD operations (Create, Read, Update, Delete) via `StudentController`.
-- Data persistence using Spring Data JPA and an H2 in-memory database.
-
-**How to run:**
-1. Navigate to the directory: `cd springboot-api`
-2. Run using Maven wrapper: `./mvnw spring-boot:run` (Mac/Linux) or `mvnw.cmd spring-boot:run` (Windows)
-3. The API will be available at `http://localhost:8080/api/students`.
+## How to Run
+- **HTML/JS/CSS Experiments & Projects**: Simply open `index.html` in your browser.
+- **React Apps**: Navigate to the specific folder, run `npm install` and then `npm run dev`.
+- **Java / Spring Boot**: For Java, run `javac *.java && java Main`. For Spring Boot, use `./mvnw spring-boot:run`.

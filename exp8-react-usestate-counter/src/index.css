@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap');
+
+:root {
+  --bg: #1e1e2f;
+  --card-bg: #2a2a40;
+  --text: #ffffff;
+  --success: #00d084;
+  --danger: #ff4757;
+  --secondary: #747d8c;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 500px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.app-header h1 {
+  font-size: 2.2rem;
+  margin-bottom: 5px;
+}
+
+.app-header p {
+  color: #a4b0be;
+  font-weight: 400;
+}
+
+.back-link {
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: white;
+  text-decoration: none;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 5px 12px;
+  border-radius: 20px;
+  transition: background 0.2s;
+}
+
+.back-link:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.counter-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 50px 30px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.counter-value {
+  font-size: 6rem;
+  font-weight: 800;
+  margin-bottom: 40px;
+  transition: color 0.3s ease;
+}
+
+.counter-value.neutral { color: var(--text); }
+.counter-value.positive { color: var(--success); }
+.counter-value.negative { color: var(--danger); }
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.btn {
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.1s, filter 0.2s;
+}
+
+.btn:active { transform: scale(0.95); }
+.btn:hover { filter: brightness(1.1); }
+
+.btn-success { background: var(--success); }
+.btn-danger { background: var(--danger); }
+.btn-secondary { background: var(--secondary); }

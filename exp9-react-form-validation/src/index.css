@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+  --primary: #f43f5e;
+  --primary-hover: #e11d48;
+  --bg: #fff1f2;
+  --card: #ffffff;
+  --text: #3f3f46;
+  --border: #e4e4e7;
+  --error: #ef4444;
+  --success: #10b981;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 450px;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+
+.header p {
+  font-size: 0.9rem;
+  color: #71717a;
+}
+
+.back-link {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  border: 1px solid var(--primary);
+  padding: 4px 10px;
+  border-radius: 20px;
+  transition: all 0.2s;
+}
+
+.back-link:hover {
+  background: var(--primary);
+  color: white;
+}
+
+.form-card {
+  background: var(--card);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(244, 63, 94, 0.1);
+}
+
+.success-banner {
+  background-color: #d1fae5;
+  color: #065f46;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 25px;
+  font-weight: 500;
+  border: 1px solid #34d399;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 500;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+
+input {
+  padding: 12px 15px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+input:focus {
+  border-color: var(--primary);
+}
+
+input.error-input {
+  border-color: var(--error);
+  background-color: #fef2f2;
+}
+
+.error-text {
+  color: var(--error);
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  background-color: var(--primary-hover);
+}

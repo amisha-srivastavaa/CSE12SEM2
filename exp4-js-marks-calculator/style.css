@@ -1,0 +1,150 @@
+:root {
+    --primary: #4f46e5;
+    --primary-hover: #4338ca;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --border: #e2e8f0;
+    --success: #10b981;
+    --danger: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: var(--card);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+header {
+    background: var(--primary);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+}
+
+header h1 { font-size: 1.5rem; margin-bottom: 5px; }
+header p { opacity: 0.8; font-size: 0.9rem; }
+
+.back-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 4px 10px;
+    border-radius: 12px;
+}
+
+main { padding: 30px; }
+
+label, h2 {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+}
+
+input[type="number"]:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+button {
+    width: 100%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+button:hover { background: var(--primary-hover); }
+
+.secondary-btn {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+    margin-top: 15px;
+}
+.secondary-btn:hover { background: #f0f4ff; }
+
+.hidden { display: none !important; }
+
+.error {
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.subject-input-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.subject-input-group span { min-width: 80px; font-weight: 500; }
+.subject-input-group input { margin-bottom: 0; }
+
+.result-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+}
+.result-row:last-child { border-bottom: none; }
+
+.grade-badge {
+    background: var(--primary);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+}
+
+.status-pass { color: var(--success); }
+.status-fail { color: var(--danger); }

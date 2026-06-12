@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Records Portal</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <h2><i class="fas fa-building"></i> CorpBase</h2>
+        <nav>
+            <button id="btnAll"><i class="fas fa-users"></i> All Employees</button>
+            <button id="btnFilterSalary"><i class="fas fa-filter"></i> Salary > 50k</button>
+            <button id="btnTotalPayout"><i class="fas fa-coins"></i> Total Payout</button>
+            <button id="btnAvgSalary"><i class="fas fa-chart-line"></i> Average Salary</button>
+        </nav>
+        
+        <div class="dept-filter">
+            <label for="deptSelect">Filter by Department</label>
+            <select id="deptSelect">
+                <option value="">Select Department...</option>
+                <option value="IT">IT</option>
+                <option value="HR">HR</option>
+                <option value="Finance">Finance</option>
+                <option value="Sales">Sales</option>
+            </select>
+        </div>
+        
+        <a href="../index.html" class="exit-link"><i class="fas fa-sign-out-alt"></i> Exit Experiment</a>
+    </div>
+
+    <main class="content">
+        <header>
+            <h1>Employee Records Management</h1>
+            <p>Experiment 5: JavaScript Objects & Arrays</p>
+        </header>
+
+        <div id="alertBox" class="alert-box hidden">
+            <!-- Dynamic alerts (e.g., Total Salary) -->
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Salary ($)</th>
+                    </tr>
+                </thead>
+                <tbody id="employeeTableBody">
+                    <!-- Data rendered via JS -->
+                </tbody>
+            </table>
+        </div>
+        <div id="emptyState" class="empty-state hidden">
+            No employees found matching the criteria.
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

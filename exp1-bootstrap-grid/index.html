@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Grid System Demo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom Theme: Elegant Minimalist */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #fcfcfc; }
+        .header-bg { background-color: #2c3e50; color: white; padding: 40px 0; }
+        .content-box { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); 
+            height: 100%; 
+            border-top: 4px solid #3498db;
+        }
+        .footer-bg { background-color: #ecf0f1; color: #7f8c8d; padding: 20px 0; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header-bg text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">GridMaster Layouts</h1>
+            <p class="lead">Experiment 1: Mastering the Bootstrap 5 Grid System</p>
+        </div>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold text-info" href="#">GridMaster</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                    <li class="nav-item ms-lg-3"><a class="nav-link text-warning" href="../index.html">← Back</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content Section (Grid System) -->
+    <main class="container my-5">
+        <div class="row g-4">
+            <!-- 
+              Grid Requirements: 
+              - Two columns on medium/large screens (col-md-6)
+              - One column on small screens (col-12)
+            -->
+            <div class="col-12 col-md-6 col-lg-8">
+                <div class="content-box">
+                    <h2 class="text-primary mb-3">Main Content Area</h2>
+                    <p>This column takes up 12 grid units on small screens, 6 on medium screens, and 8 on large screens. It demonstrates how Bootstrap's responsive breakpoints seamlessly handle layout changes.</p>
+                    <p>The grid system is based on a 12-column layout. By combining classes like <code>.col-12</code>, <code>.col-md-6</code>, and <code>.col-lg-8</code>, we ensure our content is perfectly tailored for mobile phones, tablets, and desktop monitors.</p>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="content-box border-top border-warning">
+                    <h2 class="text-warning mb-3">Sidebar / Widgets</h2>
+                    <p>This column sits next to the main content on wider screens. On mobile devices, it automatically stacks below the main content.</p>
+                    <ul class="list-group list-group-flush mt-4">
+                        <li class="list-group-item">Responsive Design</li>
+                        <li class="list-group-item">Mobile First Approach</li>
+                        <li class="list-group-item">Flexbox Utilities</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer-bg text-center">
+        <div class="container">
+            <p class="mb-0">&copy; 2026 GridMaster Inc. All rights reserved. | Experiment 1</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
