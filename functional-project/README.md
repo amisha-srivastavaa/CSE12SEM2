@@ -21,3 +21,10 @@ This tool allows users to search for any city worldwide and instantly retrieve c
 1. Open this folder in your file explorer.
 2. Open `index.html` in your preferred web browser.
 3. No build tools or local servers are required.
+
+## New Features
+- **5-Day Forecast:** Displays daily maximum temperatures and conditions in a compact horizontal row.
+- **Geolocation (`My Location`):** Uses the browser's `navigator.geolocation` API to auto-detect and fetch the user's local weather.
+- **Dynamic Theming:** The background tint color subtly shifts based on the current weather condition (e.g., light blue for clear, darker gray for rain).
+- **Unit Toggle:** Users can instantly switch between Celsius (°C) and Fahrenheit (°F) with mathematical conversions.
+- **Recent Searches History:** Automatically saves up to 5 of the most recently searched locations to `localStorage` and displays them in a focused dropdown.
