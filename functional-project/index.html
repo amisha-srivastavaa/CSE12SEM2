@@ -3,104 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
+    <title>Minimal Weather Application</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="theme-clouds">
 
-    <!-- Dynamic Tinted background block -->
-    <div id="bgTint" class="bg-tint theme-default"></div>
-
-    <nav class="minimal-nav">
-        <a href="../index.html">← Back</a>
-        <div class="nav-controls">
-            <span class="unit-toggle" id="unitToggle">
-                <span class="unit-btn active" data-unit="c">°C</span> | <span class="unit-btn" data-unit="f">°F</span>
-            </span>
-        </div>
-    </nav>
-
-    <div class="app-layout">
+    <div class="app-container">
         
-        <!-- Left Column: Search, Primary Weather & Forecast -->
-        <aside class="layout-left">
-            
+        <!-- Top Search Bar (Outside Columns) -->
+        <header class="top-header">
+            <a href="../index.html" class="back-link">← Back to Projects</a>
             <div class="search-wrapper">
                 <form id="searchForm" class="search-form">
-                    <input type="text" id="cityInput" placeholder="Enter location..." autocomplete="off" required>
-                    <button type="button" id="geoBtn" class="icon-btn" title="My Location"><i class="fas fa-location-crosshairs"></i></button>
-                    <button type="submit" id="searchBtn" class="icon-btn"><i class="fas fa-arrow-right"></i></button>
+                    <input type="text" id="cityInput" placeholder="Enter city name..." autocomplete="off" required>
+                    <button type="submit" id="searchBtn" class="search-btn"><i class="fas fa-search"></i></button>
                 </form>
-                
-                <!-- Recent Searches Dropdown -->
                 <ul id="recentSearches" class="recent-dropdown hidden"></ul>
-
-                <div id="errorMessage" class="error-msg hidden">Location not found. Try again.</div>
+                <div id="errorMessage" class="error-msg hidden">City not found. Check spelling.</div>
             </div>
+            <div id="loadingIndicator" class="loading-msg hidden">Fetching data...</div>
+        </header>
 
-            <div id="statusMessage" class="status-box">
-                Ready for query.
-            </div>
-
-            <div id="loadingIndicator" class="status-box hidden">
-                Fetching records...
-            </div>
-
-            <!-- Primary Weather Data -->
-            <div id="primaryWeather" class="primary-weather hidden">
-                <div class="location-header">
-                    <h1 id="cityName">San Francisco, US</h1>
-                    <p id="weatherDescription" class="condition-label">Clear</p>
-                </div>
-
-                <div class="temperature-block">
-                    <span id="temperature" class="huge-temp">22</span>
-                    <span class="temp-unit" id="mainTempUnit">°C</span>
-                    <i id="weatherIcon" class="fas fa-sun weather-icon-main"></i>
-                </div>
-
-                <!-- 5-Day Forecast -->
-                <div class="forecast-section">
-                    <span class="section-title">5-Day Forecast</span>
-                    <div id="forecastRow" class="forecast-row">
-                        <!-- Forecast items will be injected here -->
-                    </div>
-                </div>
-            </div>
-
-        </aside>
-
-        <!-- Right Column: Staggered Secondary Details -->
-        <main class="layout-right">
+        <!-- Main Content Layout (Hidden until data is fetched) -->
+        <div id="weatherContent" class="app-columns hidden">
             
-            <div id="secondaryWeather" class="secondary-metrics hidden">
-                <!-- Staggered Layout for Details -->
-                <div class="metric-card offset-1">
-                    <span class="metric-title">Feels Like</span>
-                    <div class="metric-data">
-                        <span id="feelsLike">22</span><span class="temp-unit-small">°C</span>
-                    </div>
+            <!-- Left Column (40%) -->
+            <aside class="left-col">
+                <div class="location-row">
+                    <h1 id="cityName">Delhi, IN</h1>
+                    <button type="button" id="geoBtn" class="geo-btn" title="My Location"><i class="fas fa-location-crosshairs"></i></button>
+                </div>
+                
+                <div class="condition-row">
+                    <i id="weatherIcon" class="fas fa-cloud condition-icon"></i>
+                    <span id="weatherDescription" class="condition-text">Partly Cloudy</span>
                 </div>
 
-                <div class="metric-card offset-2">
-                    <span class="metric-title">Relative Humidity</span>
-                    <div class="metric-data">
-                        <span id="humidity">45%</span>
-                    </div>
-                    <div class="metric-decorative-line"></div>
+                <div class="main-temp-wrapper">
+                    <span id="temperature" class="main-temp">27</span>
+                    <span class="main-unit" id="mainTempUnit">°C</span>
                 </div>
 
-                <div class="metric-card offset-3">
-                    <span class="metric-title">Wind Velocity</span>
-                    <div class="metric-data">
-                        <span id="windSpeed">12 km/h</span>
+                <div class="unit-toggle" id="unitToggle">
+                    <button class="unit-btn active" data-unit="c">°C</button>
+                    <button class="unit-btn" data-unit="f">°F</button>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-item">
+                        <span class="metric-label">Feels like</span>
+                        <span class="metric-val" id="feelsLike">29°C</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Humidity</span>
+                        <span class="metric-val" id="humidity">65%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Wind</span>
+                        <span class="metric-val" id="windSpeed">14 km/h</span>
                     </div>
                 </div>
-            </div>
+            </aside>
 
-        </main>
+            <!-- Right Column (60%) -->
+            <main class="right-col">
+                
+                <section class="forecast-section">
+                    <h3 class="section-title">Hourly Forecast</h3>
+                    <div class="hourly-row" id="hourlyRow">
+                        <!-- Hourly items injected here -->
+                    </div>
+                </section>
 
+                <section class="forecast-section">
+                    <h3 class="section-title">5-Day Forecast</h3>
+                    <div class="daily-list" id="dailyList">
+                        <!-- Daily items injected here -->
+                    </div>
+                </section>
+
+            </main>
+
+        </div>
     </div>
 
     <script src="script.js"></script>
