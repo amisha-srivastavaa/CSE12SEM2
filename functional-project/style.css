@@ -1,17 +1,22 @@
 /* 
-   Weather App Styling - Experimental Asymmetrical Layout
-   Focus on typography, whitespace, and a non-standard grid.
+   Weather App Styling - Asymmetrical Layout with Dynamic Themes
 */
 
 :root {
     --bg-main: #fafafa;
-    --bg-tint: #f1f5f9;
     --text-primary: #111827;
     --text-muted: #6b7280;
     --accent: #2563eb;
     --border-light: #e5e7eb;
     --card-bg: #ffffff;
     --font-stack: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    
+    /* Dynamic Theme Tints */
+    --theme-default: #f1f5f9;
+    --theme-clear: #e0f2fe; /* Light blue */
+    --theme-cloudy: #e2e8f0; /* Gray */
+    --theme-rain: #cbd5e1; /* Darker gray-blue */
+    --theme-snow: #f8fafc; /* Very light slate */
 }
 
 * {
@@ -29,22 +34,29 @@ body {
     position: relative;
 }
 
-/* Background soft block to break the grid */
+/* Background Dynamic Tint */
 .bg-tint {
     position: absolute;
     top: 0;
     right: 0;
     width: 60%;
     height: 70vh;
-    background-color: var(--bg-tint);
     z-index: -1;
     border-bottom-left-radius: 40px;
+    transition: background-color 0.8s ease;
 }
 
-/* Minimal top nav floating outside the main content */
+.theme-default { background-color: var(--theme-default); }
+.theme-clear { background-color: var(--theme-clear); }
+.theme-cloudy { background-color: var(--theme-cloudy); }
+.theme-rain { background-color: var(--theme-rain); }
+.theme-snow { background-color: var(--theme-snow); }
+
+/* Minimal Top Nav & Unit Toggle */
 .minimal-nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 1.5rem 2rem;
     font-size: 0.85rem;
     color: var(--text-muted);
@@ -54,6 +66,22 @@ body {
     color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
+}
+
+.unit-toggle {
+    cursor: pointer;
+    font-weight: 500;
+    user-select: none;
+}
+
+.unit-btn {
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.unit-btn.active {
+    color: var(--text-primary);
+    font-weight: 700;
 }
 
 /* 2-Column Split Layout */
@@ -66,22 +94,23 @@ body {
 
 /* Left Column - 40% */
 .layout-left {
-    flex: 0 0 40%;
+    flex: 0 0 45%;
     padding: 4rem 3rem 2rem 3rem;
     display: flex;
     flex-direction: column;
 }
 
-/* Right Column - 60% */
+/* Right Column - 55% */
 .layout-right {
     flex: 1;
     padding: 6rem 4rem;
     position: relative;
 }
 
-/* Search Input */
+/* Search Input & Controls */
 .search-wrapper {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    position: relative;
 }
 
 .search-form {
@@ -106,22 +135,21 @@ body {
     outline: none;
 }
 
-.search-form input::placeholder {
-    color: #9ca3af;
-}
+.search-form input::placeholder { color: #9ca3af; }
 
-.search-form button {
+.icon-btn {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 1.2rem;
     color: var(--text-primary);
     transition: transform 0.2s ease, color 0.2s ease;
+    margin-left: 0.5rem;
+    padding: 0.25rem;
 }
 
-.search-form button:hover {
+.icon-btn:hover {
     color: var(--accent);
-    transform: translateX(4px);
 }
 
 .error-msg {
@@ -130,9 +158,35 @@ body {
     margin-top: 0.5rem;
 }
 
-.hidden {
-    display: none !important;
+.hidden { display: none !important; }
+
+/* Recent Searches Dropdown */
+.recent-dropdown {
+    list-style: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    border-top: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    z-index: 10;
 }
+
+.recent-dropdown li {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.recent-dropdown li:last-child { border-bottom: none; }
+.recent-dropdown li:hover { background-color: var(--bg-main); }
+.recent-dropdown .history-icon { color: var(--text-muted); font-size: 0.8rem; }
 
 .status-box {
     font-size: 0.9rem;
@@ -140,9 +194,9 @@ body {
     font-family: monospace;
 }
 
-/* Primary Weather (Left Column) */
+/* Primary Weather */
 .primary-weather {
-    margin-top: 2rem;
+    margin-top: 1rem;
     animation: slideUp 0.5s ease;
 }
 
@@ -164,13 +218,14 @@ body {
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 
 .temperature-block {
     display: flex;
     align-items: flex-start;
     position: relative;
+    margin-bottom: 3rem;
 }
 
 .huge-temp {
@@ -195,6 +250,46 @@ body {
     opacity: 0.8;
 }
 
+/* 5-Day Forecast Row */
+.section-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 0.5rem;
+}
+
+.forecast-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.forecast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.forecast-day {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.forecast-icon {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+}
+
+.forecast-temp {
+    font-weight: 500;
+}
+
 /* Secondary Metrics Staggered (Right Column) */
 .secondary-metrics {
     position: relative;
@@ -207,12 +302,7 @@ body {
     padding: 1.5rem 2rem;
     width: 250px;
     position: absolute;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
     transition: transform 0.3s ease;
-}
-
-.metric-card:hover {
-    transform: translateY(-2px);
 }
 
 .metric-title {
@@ -229,23 +319,16 @@ body {
     font-weight: 600;
 }
 
-/* The Staggering / Offsets */
-.offset-1 {
-    top: 0;
-    left: 0;
+.temp-unit-small {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-left: 2px;
 }
 
-.offset-2 {
-    top: 140px;
-    left: 120px;
-    z-index: 2;
-    border-left: 3px solid var(--text-primary);
-}
-
-.offset-3 {
-    top: 280px;
-    left: 40px;
-}
+.offset-1 { top: 0; left: 0; }
+.offset-2 { top: 140px; left: 120px; z-index: 2; border-left: 3px solid var(--text-primary); }
+.offset-3 { top: 280px; left: 40px; }
 
 .metric-decorative-line {
     width: 40px;
@@ -254,34 +337,11 @@ body {
     margin-top: 1rem;
 }
 
-/* Responsive collapse for Mobile */
+/* Responsive */
 @media (max-width: 800px) {
-    .app-layout {
-        flex-direction: column;
-    }
-    
-    .layout-left, .layout-right {
-        flex: auto;
-        padding: 2rem;
-    }
-    
-    .bg-tint {
-        width: 100%;
-        height: 40vh;
-        border-radius: 0;
-    }
-    
-    .secondary-metrics {
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-    
-    .metric-card {
-        position: relative;
-        top: 0 !important;
-        left: 0 !important;
-        width: 100%;
-    }
+    .app-layout { flex-direction: column; }
+    .layout-left, .layout-right { flex: auto; padding: 2rem; }
+    .bg-tint { width: 100%; height: 40vh; border-radius: 0; }
+    .secondary-metrics { height: auto; display: flex; flex-direction: column; gap: 1.5rem; margin-top: 2rem;}
+    .metric-card { position: relative; top: 0 !important; left: 0 !important; width: 100%; }
 }

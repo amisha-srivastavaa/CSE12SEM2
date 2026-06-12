@@ -4,30 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <!-- Standard icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Subtle tinted background block for visual interest -->
-    <div class="bg-tint"></div>
+    <!-- Dynamic Tinted background block -->
+    <div id="bgTint" class="bg-tint theme-default"></div>
 
     <nav class="minimal-nav">
         <a href="../index.html">← Back</a>
-        <span>Weather Data</span>
+        <div class="nav-controls">
+            <span class="unit-toggle" id="unitToggle">
+                <span class="unit-btn active" data-unit="c">°C</span> | <span class="unit-btn" data-unit="f">°F</span>
+            </span>
+        </div>
     </nav>
 
     <div class="app-layout">
         
-        <!-- Left Column: Search & Primary Weather -->
+        <!-- Left Column: Search, Primary Weather & Forecast -->
         <aside class="layout-left">
             
             <div class="search-wrapper">
                 <form id="searchForm" class="search-form">
                     <input type="text" id="cityInput" placeholder="Enter location..." autocomplete="off" required>
-                    <button type="submit" id="searchBtn"><i class="fas fa-arrow-right"></i></button>
+                    <button type="button" id="geoBtn" class="icon-btn" title="My Location"><i class="fas fa-location-crosshairs"></i></button>
+                    <button type="submit" id="searchBtn" class="icon-btn"><i class="fas fa-arrow-right"></i></button>
                 </form>
+                
+                <!-- Recent Searches Dropdown -->
+                <ul id="recentSearches" class="recent-dropdown hidden"></ul>
+
                 <div id="errorMessage" class="error-msg hidden">Location not found. Try again.</div>
             </div>
 
@@ -48,8 +56,16 @@
 
                 <div class="temperature-block">
                     <span id="temperature" class="huge-temp">22</span>
-                    <span class="temp-unit">°C</span>
+                    <span class="temp-unit" id="mainTempUnit">°C</span>
                     <i id="weatherIcon" class="fas fa-sun weather-icon-main"></i>
+                </div>
+
+                <!-- 5-Day Forecast -->
+                <div class="forecast-section">
+                    <span class="section-title">5-Day Forecast</span>
+                    <div id="forecastRow" class="forecast-row">
+                        <!-- Forecast items will be injected here -->
+                    </div>
                 </div>
             </div>
 
@@ -63,7 +79,7 @@
                 <div class="metric-card offset-1">
                     <span class="metric-title">Feels Like</span>
                     <div class="metric-data">
-                        <span id="feelsLike">22°C</span>
+                        <span id="feelsLike">22</span><span class="temp-unit-small">°C</span>
                     </div>
                 </div>
 
