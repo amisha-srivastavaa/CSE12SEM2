@@ -1,0 +1,24 @@
+background{
+    background-color: lightblue;
+}
+colgroup{
+    background-color: lightgreen;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+student{
+    color: red;
+    
+}
+marks{
+    color: blue;
+}
+course{
+    color: green;
+}

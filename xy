@@ -1,0 +1,54 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+string decryptPassword(string s) {
+    string res = "";
+    int n = s.length();
+    int numPtr = 0; // Pointer to track numbers moved to the front
+
+    // Step 1: Iterate through the string to handle swaps and '0' replacements
+    for (int i = 0; i < n; i++) {
+        // If we find a number at the start, it's a stored digit; skip it for now
+        if (isdigit(s[i]) && s[i] != '0') {
+            numPtr++;
+            continue;
+        }
+
+        if (s[i] == '*') {
+            // Swap the two characters before the '*'
+            if (res.length() >= 2) {
+                swap(res[res.length() - 1], res[res.length() - 2]);
+            }
+        } else if (s[i] == '0') {
+            // Replace '0' with the digit from the front of the original string
+            numPtr--;
+            res += s[numPtr];
+        } else {
+            // Normal character
+            res += s[i];
+        }
+    }
+
+    return res;
+}
+
+int main() {
+    // Example: "51Pa*0Lp*0e" -> "aP1pL5e"
+   , res[res.length() - 2]);
+            }
+        } else if (s[i] == '0') {
+            // Replace '0' with the digit from the front of the original string
+            numPtr--;
+            res += s[numPtr];
+        } else {
+            // Normal character
+            res += s[i];
+        }
+    }
+
+    return res;
+}

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive To-Do List</title>
+    <!-- Custom CSS shared across JS projects -->
+    <link href="style.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="theme-warm">
+
+    <div class="app-container">
+        <!-- Navigation between JS projects -->
+        <nav class="project-nav">
+            <a href="dom-manipulation.html" class="active">To-Do List</a>
+            <a href="api-fetch.html">API Fetcher</a>
+            <a href="../index.html" class="back-link">← Back to Home</a>
+        </nav>
+
+        <main class="content-box">
+            <header class="app-header">
+                <h1>Task Master</h1>
+                <p>Manage your daily tasks using Vanilla JS & LocalStorage</p>
+            </header>
+
+            <div class="input-group">
+                <input type="text" id="taskInput" placeholder="What needs to be done?" autocomplete="off">
+                <button id="addTaskBtn"><i class="fas fa-plus"></i> Add Task</button>
+            </div>
+
+            <div class="filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="pending">Pending</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+
+            <ul id="taskList" class="task-list">
+                <!-- Tasks will be dynamically injected here -->
+            </ul>
+            
+            <div class="stats">
+                <span id="taskCount">0 items total</span>
+                <button id="clearCompletedBtn" class="clear-btn">Clear Completed</button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskInput = document.getElementById('taskInput');
+            const addTaskBtn = document.getElementById('addTaskBtn');
+            const taskList = document.getElementById('taskList');
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const clearCompletedBtn = document.getElementById('clearCompletedBtn');
+            const taskCount = document.getElementById('taskCount');
+
+            // Load tasks from LocalStorage or initialize empty array
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            let currentFilter = 'all';
+
+            // Initial render
+            renderTasks();
+
+            // Event Listeners
+            addTaskBtn.addEventListener('click', addTask);
+            taskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') addTask();
+            });
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Update active class
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    // Update filter and render
+                    currentFilter = e.target.getAttribute('data-filter');
+                    renderTasks();
+                });
+            });
+
+            clearCompletedBtn.addEventListener('click', () => {
+                tasks = tasks.filter(t => !t.completed);
+                saveAndRender();
+            });
+
+            // Functions
+            function addTask() {
+                const text = taskInput.value.trim();
+                if (text === '') return;
+
+                const newTask = {
+                    id: Date.now(),
+                    text: text,
+                    completed: false
+                };
+
+                tasks.push(newTask);
+                taskInput.value = '';
+                saveAndRender();
+            }
+
+            function toggleTask(id) {
+                tasks = tasks.map(task => 
+                    task.id === id ? { ...task, completed: !task.completed } : task
+                );
+                saveAndRender();
+            }
+
+            function deleteTask(id) {
+                tasks = tasks.filter(task => task.id !== id);
+                saveAndRender();
+            }
+
+            function saveAndRender() {
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                renderTasks();
+            }
+
+            function renderTasks() {
+                // Filter logic
+                let filteredTasks = tasks;
+                if (currentFilter === 'pending') filteredTasks = tasks.filter(t => !t.completed);
+                if (currentFilter === 'completed') filteredTasks = tasks.filter(t => t.completed);
+
+                // Update count
+                taskCount.textContent = `${filteredTasks.length} item${filteredTasks.length !== 1 ? 's' : ''} ${currentFilter !== 'all' ? currentFilter : 'total'}`;
+
+                // Render HTML
+                taskList.innerHTML = '';
+                
+                if (filteredTasks.length === 0) {
+                    taskList.innerHTML = `<li class="empty-state">No tasks found.</li>`;
+                    return;
+                }
+
+                filteredTasks.forEach(task => {
+                    const li = document.createElement('li');
+                    li.className = `task-item ${task.completed ? 'completed' : ''}`;
+                    
+                    li.innerHTML = `
+                        <div class="task-checkbox" onclick="toggleTask(${task.id})">
+                            ${task.completed ? '<i class="fas fa-check"></i>' : ''}
+                        </div>
+                        <span class="task-text">${escapeHtml(task.text)}</span>
+                        <button class="delete-btn" onclick="deleteTask(${task.id})">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    `;
+                    taskList.appendChild(li);
+                });
+            }
+
+            // Make functions available globally for inline onclick handlers
+            window.toggleTask = toggleTask;
+            window.deleteTask = deleteTask;
+
+            // Utility to prevent XSS
+            function escapeHtml(unsafe) {
+                return unsafe
+                     .replace(/&/g, "&amp;")
+                     .replace(/</g, "&lt;")
+                     .replace(/>/g, "&gt;")
+                     .replace(/"/g, "&quot;")
+                     .replace(/'/g, "&#039;");
+            }
+        });
+    </script>
+</body>
+</html>
