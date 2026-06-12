@@ -1,0 +1,242 @@
+:root {
+    --bg-page: #f8fafc;
+    --bg-surface: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --border-color: #e2e8f0;
+    --accent-color: #334155;
+    --accent-hover: #1e293b;
+    --error-color: #b91c1c;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-stack);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.layout-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+}
+
+.nav-brand {
+    font-weight: 500;
+    font-size: 1rem;
+    color: var(--text-primary);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+}
+
+/* Search */
+.search-section {
+    margin-bottom: 2rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    transition: border-color 0.15s;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.input-group button {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: var(--accent-color);
+    color: #ffffff;
+    border: 1px solid var(--accent-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.15s;
+}
+
+.input-group button:hover {
+    background-color: var(--accent-hover);
+}
+
+.error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+}
+
+/* States */
+.hidden {
+    display: none !important;
+}
+
+.status-state {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    border: 1px dashed var(--border-color);
+    border-radius: var(--radius-md);
+}
+
+/* Weather Card */
+.weather-card {
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.weather-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.location-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.condition-text {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    text-transform: capitalize;
+}
+
+.weather-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.primary-metric {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.weather-icon {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+}
+
+.temperature {
+    display: flex;
+    align-items: flex-start;
+}
+
+.temp-val {
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.05em;
+}
+
+.temp-unit {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
+    color: var(--text-secondary);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    background-color: var(--bg-page);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+}
+
+.metric-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.metric-value {
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Footer */
+.site-footer {
+    margin-top: 3rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <!-- FontAwesome for minimal icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="layout-container">
+        
+        <header class="top-nav">
+            <a href="../index.html" class="nav-link">← Back to Index</a>
+            <span class="nav-brand">Weather Dashboard</span>
+        </header>
+
+        <main class="main-content">
+            <!-- Search Section -->
+            <section class="search-section">
+                <form id="searchForm" class="search-form">
+                    <label for="cityInput" class="sr-only">Search location</label>
+                    <div class="input-group">
+                        <input type="text" id="cityInput" placeholder="San Francisco" autocomplete="off" required>
+                        <button type="submit" id="searchBtn">Search</button>
+                    </div>
+                </form>
+                <div id="errorMessage" class="error-message hidden">City not found. Check spelling.</div>
+            </section>
+
+            <!-- Status -->
+            <div id="statusState" class="status-state">
+                <p>Enter a location to view current conditions.</p>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="status-state hidden">
+                <p>Fetching data...</p>
+            </div>
+
+            <!-- Weather Display Section -->
+            <section id="weatherCard" class="weather-card hidden">
+                
+                <header class="weather-header">
+                    <h2 id="cityName" class="location-title">San Francisco, US</h2>
+                    <p id="weatherDescription" class="condition-text">Clear sky</p>
+                </header>
+
+                <div class="weather-body">
+                    <div class="primary-metric">
+                        <i id="weatherIcon" class="fas fa-sun weather-icon"></i>
+                        <div class="temperature">
+                            <span id="temperature" class="temp-val">22</span><span class="temp-unit">°C</span>
+                        </div>
+                    </div>
+
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="metric-label">Feels Like</span>
+                            <span id="feelsLike" class="metric-value">22°C</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Humidity</span>
+                            <span id="humidity" class="metric-value">60%</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Wind</span>
+                            <span id="windSpeed" class="metric-value">14 km/h</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+        
+        <footer class="site-footer">
+            <p>Data provided by Open-Meteo</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
