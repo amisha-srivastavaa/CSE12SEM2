@@ -31,7 +31,7 @@ These folders cover specific topics we learned in class:
 ### The 4 Major Projects & Capstone
 These were bigger, more comprehensive builds:
 
-0. **`functional-project`**: 🏆 **Capstone:** A minimal, utilitarian weather dashboard utilizing the Open-Meteo API and vanilla JavaScript for dynamic DOM updates.
+0. **`functional-project`**: **Capstone:** A minimal, utilitarian weather dashboard utilizing the Open-Meteo API and vanilla JavaScript for dynamic DOM updates.
 1. **`bootstrap-website`**: A corporate landing page heavily utilizing Bootstrap 5.
 2. **`javascript-projects`**: Vanilla JS apps including a To-Do list and an API fetcher.
 3. **`react-app`**: A complete Student Dashboard built as a Single Page Application using React + Vite.
