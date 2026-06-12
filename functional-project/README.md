@@ -23,8 +23,9 @@ This tool allows users to search for any city worldwide and instantly retrieve c
 3. No build tools or local servers are required.
 
 ## New Features
-- **5-Day Forecast:** Displays daily maximum temperatures and conditions in a compact horizontal row.
-- **Geolocation (`My Location`):** Uses the browser's `navigator.geolocation` API to auto-detect and fetch the user's local weather.
-- **Dynamic Theming:** The background tint color subtly shifts based on the current weather condition (e.g., light blue for clear, darker gray for rain).
-- **Unit Toggle:** Users can instantly switch between Celsius (°C) and Fahrenheit (°F) with mathematical conversions.
-- **Recent Searches History:** Automatically saves up to 5 of the most recently searched locations to `localStorage` and displays them in a focused dropdown.
+- **Asymmetrical 2-Column Layout:** A minimalist design focusing on typography and clear borders, avoiding symmetric card layouts.
+- **Dynamic Theming:** Pure CSS background color changes based on live weather data (e.g., `#f1f5f9` for clouds, `#e2e8f0` for rain).
+- **Geolocation (`My Location`):** Uses the native `navigator.geolocation` API to auto-detect and fetch the local weather.
+- **Hourly & 5-Day Forecasts:** Integrates detailed forecast data from Open-Meteo, featuring a horizontally scrolling 6-hour forecast and a comprehensive 5-day outlook with high/low temperatures.
+- **Unit Toggle:** Native front-end segmented control to mathematically switch between Celsius (°C) and Fahrenheit (°F) instantly.
+- **Recent Searches History:** Automatically saves up to 5 recently searched locations to `localStorage` and displays them in an integrated dropdown.
