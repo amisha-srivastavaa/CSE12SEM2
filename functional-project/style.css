@@ -1,15 +1,17 @@
+/* 
+   Weather App Styling - Experimental Asymmetrical Layout
+   Focus on typography, whitespace, and a non-standard grid.
+*/
+
 :root {
-    --bg-page: #f8fafc;
-    --bg-surface: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #64748b;
-    --border-color: #e2e8f0;
-    --accent-color: #334155;
-    --accent-hover: #1e293b;
-    --error-color: #b91c1c;
-    --radius-sm: 4px;
-    --radius-md: 6px;
-    --font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    --bg-main: #fafafa;
+    --bg-tint: #f1f5f9;
+    --text-primary: #111827;
+    --text-muted: #6b7280;
+    --accent: #2563eb;
+    --border-light: #e5e7eb;
+    --card-bg: #ffffff;
+    --font-stack: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 * {
@@ -19,224 +21,267 @@
 }
 
 body {
-    background-color: var(--bg-page);
-    color: var(--text-primary);
     font-family: var(--font-stack);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
     line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    position: relative;
 }
 
-.sr-only {
+/* Background soft block to break the grid */
+.bg-tint {
     position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 70vh;
+    background-color: var(--bg-tint);
+    z-index: -1;
+    border-bottom-left-radius: 40px;
 }
 
-.layout-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-/* Header */
-.top-nav {
+/* Minimal top nav floating outside the main content */
+.minimal-nav {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-bottom: 2rem;
+    padding: 1.5rem 2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
 }
 
-.nav-link {
-    color: var(--text-secondary);
+.minimal-nav a {
+    color: var(--text-primary);
     text-decoration: none;
-    font-size: 0.875rem;
-}
-
-.nav-link:hover {
-    color: var(--text-primary);
-}
-
-.nav-brand {
     font-weight: 500;
-    font-size: 1rem;
-    color: var(--text-primary);
 }
 
-/* Main Content */
-.main-content {
-    flex: 1;
-}
-
-/* Search */
-.search-section {
-    margin-bottom: 2rem;
-}
-
-.input-group {
+/* 2-Column Split Layout */
+.app-layout {
     display: flex;
-    gap: 0.5rem;
+    min-height: calc(100vh - 80px);
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-.input-group input {
+/* Left Column - 40% */
+.layout-left {
+    flex: 0 0 40%;
+    padding: 4rem 3rem 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Right Column - 60% */
+.layout-right {
     flex: 1;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
+    padding: 6rem 4rem;
+    position: relative;
+}
+
+/* Search Input */
+.search-wrapper {
+    margin-bottom: 3rem;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--text-primary);
+    padding-bottom: 0.5rem;
+    transition: border-color 0.3s ease;
+}
+
+.search-form:focus-within {
+    border-color: var(--accent);
+}
+
+.search-form input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
     font-family: inherit;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    background-color: var(--bg-surface);
     color: var(--text-primary);
-    transition: border-color 0.15s;
-}
-
-.input-group input:focus {
     outline: none;
-    border-color: var(--accent-color);
 }
 
-.input-group button {
-    padding: 0.75rem 1.25rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    font-family: inherit;
-    background-color: var(--accent-color);
-    color: #ffffff;
-    border: 1px solid var(--accent-color);
-    border-radius: var(--radius-md);
+.search-form input::placeholder {
+    color: #9ca3af;
+}
+
+.search-form button {
+    background: none;
+    border: none;
     cursor: pointer;
-    transition: background-color 0.15s;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    transition: transform 0.2s ease, color 0.2s ease;
 }
 
-.input-group button:hover {
-    background-color: var(--accent-hover);
+.search-form button:hover {
+    color: var(--accent);
+    transform: translateX(4px);
 }
 
-.error-message {
-    color: var(--error-color);
-    font-size: 0.875rem;
+.error-msg {
+    color: #dc2626;
+    font-size: 0.85rem;
     margin-top: 0.5rem;
 }
 
-/* States */
 .hidden {
     display: none !important;
 }
 
-.status-state {
-    padding: 3rem 1rem;
-    text-align: center;
-    color: var(--text-secondary);
-    border: 1px dashed var(--border-color);
-    border-radius: var(--radius-md);
+.status-box {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-family: monospace;
 }
 
-/* Weather Card */
-.weather-card {
-    background-color: var(--bg-surface);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 2rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+/* Primary Weather (Left Column) */
+.primary-weather {
+    margin-top: 2rem;
+    animation: slideUp 0.5s ease;
 }
 
-.weather-header {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.location-title {
-    font-size: 1.25rem;
-    font-weight: 600;
+.location-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
     margin-bottom: 0.25rem;
 }
 
-.condition-text {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    text-transform: capitalize;
+.condition-label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 3rem;
 }
 
-.weather-body {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.primary-metric {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.weather-icon {
-    font-size: 2.5rem;
-    color: var(--text-primary);
-}
-
-.temperature {
+.temperature-block {
     display: flex;
     align-items: flex-start;
+    position: relative;
 }
 
-.temp-val {
-    font-size: 3rem;
-    font-weight: 400;
-    line-height: 1;
+.huge-temp {
+    font-size: 7rem;
+    font-weight: 300;
+    line-height: 0.8;
     letter-spacing: -0.05em;
 }
 
 .temp-unit {
-    font-size: 1.25rem;
-    font-weight: 500;
-    margin-top: 0.25rem;
-    color: var(--text-secondary);
+    font-size: 2rem;
+    font-weight: 400;
+    margin-left: 0.25rem;
+    color: var(--text-muted);
 }
 
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    background-color: var(--bg-page);
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    padding: 1rem;
+.weather-icon-main {
+    font-size: 3rem;
+    margin-left: auto;
+    align-self: flex-end;
+    color: var(--text-primary);
+    opacity: 0.8;
 }
 
-.metric-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+/* Secondary Metrics Staggered (Right Column) */
+.secondary-metrics {
+    position: relative;
+    height: 100%;
 }
 
-.metric-label {
+.metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border-light);
+    padding: 1.5rem 2rem;
+    width: 250px;
+    position: absolute;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-2px);
+}
+
+.metric-title {
     font-size: 0.75rem;
-    color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 1rem;
 }
 
-.metric-value {
-    font-size: 0.875rem;
-    font-weight: 500;
+.metric-data {
+    font-size: 1.75rem;
+    font-weight: 600;
 }
 
-/* Footer */
-.site-footer {
-    margin-top: 3rem;
-    text-align: center;
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    border-top: 1px solid var(--border-color);
-    padding-top: 1.5rem;
+/* The Staggering / Offsets */
+.offset-1 {
+    top: 0;
+    left: 0;
+}
+
+.offset-2 {
+    top: 140px;
+    left: 120px;
+    z-index: 2;
+    border-left: 3px solid var(--text-primary);
+}
+
+.offset-3 {
+    top: 280px;
+    left: 40px;
+}
+
+.metric-decorative-line {
+    width: 40px;
+    height: 1px;
+    background-color: var(--border-light);
+    margin-top: 1rem;
+}
+
+/* Responsive collapse for Mobile */
+@media (max-width: 800px) {
+    .app-layout {
+        flex-direction: column;
+    }
+    
+    .layout-left, .layout-right {
+        flex: auto;
+        padding: 2rem;
+    }
+    
+    .bg-tint {
+        width: 100%;
+        height: 40vh;
+        border-radius: 0;
+    }
+    
+    .secondary-metrics {
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .metric-card {
+        position: relative;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100%;
+    }
 }
