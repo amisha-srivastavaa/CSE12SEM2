@@ -29,7 +29,7 @@ These folders cover specific topics we learned in class:
 12. **`exp12-springboot-crud-employee`**: A full CRUD backend using Spring Boot, Spring Data JPA, and an H2 database.
 
 ### The 4 Major Projects & Capstone
-These were bigger, more comprehensive builds:
+
 
 0. **`functional-project`**: **Capstone:** A minimal, utilitarian weather dashboard utilizing the Open-Meteo API and vanilla JavaScript for dynamic DOM updates.
 1. **`bootstrap-website`**: A corporate landing page heavily utilizing Bootstrap 5.
