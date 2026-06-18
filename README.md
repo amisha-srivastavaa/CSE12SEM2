@@ -1,24 +1,21 @@
-# 🚀 B.Tech 2nd Semester Web Design Portfolio
+#  B.Tech 2nd Semester Web Design Portfolio
 
 Welcome to my **Web Design Portfolio** repository! This project serves as a complete showcase of everything I've learned during my 2nd Semester Web Design course — spanning from raw HTML/CSS and vanilla JavaScript all the way to modern React applications and Spring Boot REST APIs.
 
-You can view the live portfolio here:
-👉 **[Live Portfolio Homepage](https://amisha-srivastavaa.github.io/CSE12SEM2/)**
-
 ---
 
-## 🌟 What's Inside?
+## What's Inside?
 
-The repository is structured around my **12 Core Experiments** and **5 Major Projects**, wrapped in a premium, responsive, glassmorphism-styled portfolio homepage.
+The repository is structured around my **12 Core Experiments** and **5 Major Projects**.
 
-### 🏆 Capstone Project: Animated Weather Dashboard
+### Capstone Project: Animated Weather Dashboard
 Located in `functional-project/`, this is my flagship vanilla JS application.
 * **Live Canvas Wallpaper:** A fully interactive, math-driven HTML5 `<canvas>` background that renders dynamic weather conditions (drifting clouds, twinkling stars, rain, snow, lightning, and a glowing sun/moon).
 * **Live API Data:** Uses the Open-Meteo API for real-time geolocation and weather forecasting.
-* **Glassmorphism UI:** Features a sleek frosted-glass interface that adapts smoothly to mobile devices.
+* **UI:** Features a sleek frosted-glass interface that adapts smoothly to mobile devices.
 * **Day/Night Cycle:** The app automatically calculates sky gradients, celestial body angles, and color palettes based on the local time and weather code.
 
-### 🧪 The 12 Core Experiments
+### The 12 Core Experiments
 A progressive learning journey through modern web tech:
 1. **Bootstrap Grid** — Mastering responsive 12-column layouts
 2. **Bootstrap Components** — Modals, carousels, and interactive UI elements
@@ -33,7 +30,7 @@ A progressive learning journey through modern web tech:
 11. **Spring Boot Basic** — Hello World REST API setup
 12. **Spring Boot CRUD** — Full database-backed REST API with Spring Data JPA and Hibernate
 
-### 💻 The 4 Major Projects
+### The 4 Major Projects
 1. **Corporate Landing Page (`bootstrap-website`)** — Responsive, multi-section agency site.
 2. **Interactive JS Features (`javascript-projects`)** — To-Do lists and asynchronous API fetchers.
 3. **Student Dashboard (`react-app`)** — A complete React SPA built with Vite.
@@ -41,7 +38,7 @@ A progressive learning journey through modern web tech:
 
 ---
 
-## 🛠️ How to Run Locally
+## How to Run Locally
 
 ### Front-End (HTML/JS/CSS)
 No build tools required. Simply double-click `index.html` in the root directory to open the portfolio homepage, or navigate into any experiment folder and open its respective HTML file in your browser.
@@ -60,8 +57,5 @@ Requires Java 17+ and Maven.
 cd springboot-api
 mvn spring-boot:run
 ```
-The server will start on `localhost:8080`.
-
----
-
-*Built with ❤️ by Amisha Srivastava — CSE 2nd Semester 2026*
+--
+ by Amisha Srivastava — CSE 
