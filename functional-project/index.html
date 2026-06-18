@@ -4,85 +4,71 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    <meta name="description" content="Interactive weather dashboard with live canvas wallpaper, real-time forecasts, and glassmorphism UI.">
+    <meta name="description" content="Beautiful weather dashboard with interactive animated sky, clouds, stars, and real-time forecasts.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ============================================
-           ROOT & RESET
-           ============================================ */
         :root {
             --text-dark: #1e293b;
             --text-muted: #64748b;
-            --border-subtle: rgba(255, 255, 255, 0.3);
-            --glass-bg: rgba(255, 255, 255, 0.65);
-            --glass-blur: 16px;
-            --radius: 12px;
-            --panel-padding: 24px;
             --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-
-            /* Fallback backgrounds (when canvas is absent) */
-            --bg-clear: #f5edd6;
-            --bg-clouds: #dce3ea;
-            --bg-rain: #c3ced9;
-            --bg-snow: #e8ecf0;
-            --bg-thunder: #a8b5c2;
+            --radius: 12px;
         }
 
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: var(--font);
-            color: var(--text-dark);
+            color: #fff;
             line-height: 1.5;
             min-height: 100vh;
-            background-color: var(--bg-clouds);
             overflow-x: hidden;
-            transition: background-color 0.6s ease;
+            background: #0b1a3b;
         }
 
-        body.theme-clear   { background-color: var(--bg-clear); }
-        body.theme-clouds  { background-color: var(--bg-clouds); }
-        body.theme-rain    { background-color: var(--bg-rain); }
-        body.theme-snow    { background-color: var(--bg-snow); }
-        body.theme-thunder { background-color: var(--bg-thunder); }
-
-
-        /* ============================================
-           CANVAS — fixed behind everything
-           ============================================ */
-        #weatherCanvas {
+        /* ---- CANVAS ---- */
+        #skyCanvas {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             z-index: 0;
-            pointer-events: none;
         }
 
-
-        /* ============================================
-           GLASS PANEL — reusable mixin via class
-           ============================================ */
+        /* ---- GLASS PANELS ---- */
         .glass {
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--border-subtle);
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: var(--radius);
-            padding: var(--panel-padding);
         }
 
+        .glass-light {
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: var(--radius);
+            color: var(--text-dark);
+        }
 
-        /* ============================================
-           APP SHELL — sits above canvas
-           ============================================ */
+        /* day mode overrides */
+        body.day-mode .glass {
+            background: rgba(255, 255, 255, 0.55);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: var(--text-dark);
+        }
+        body.day-mode .glass .condition-row,
+        body.day-mode .glass .metric-label,
+        body.day-mode .glass .forecast-label,
+        body.day-mode .glass .hourly-time,
+        body.day-mode .glass .daily-icon,
+        body.day-mode .glass .daily-lo { color: var(--text-muted); }
+        body.day-mode .glass .unit-btn { color: var(--text-muted); }
+        body.day-mode .glass .unit-btn.active { background: var(--text-dark); color: #fff; }
+
+        /* ---- APP SHELL ---- */
         .app-shell {
             position: relative;
             z-index: 1;
@@ -91,10 +77,7 @@
             padding: 28px 24px 48px;
         }
 
-
-        /* ============================================
-           TOP BAR — search + location
-           ============================================ */
+        /* ---- TOP BAR ---- */
         .top-bar {
             display: flex;
             align-items: center;
@@ -102,16 +85,25 @@
             margin-bottom: 24px;
         }
 
+        .back-link {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.8rem;
+            margin-right: auto;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+        body.day-mode .back-link { color: var(--text-muted); }
+        body.day-mode .back-link:hover { color: var(--text-dark); }
+
         .search-area {
             flex: 1;
             position: relative;
             max-width: 460px;
         }
 
-        .search-row {
-            display: flex;
-            overflow: hidden;
-        }
+        .search-row { display: flex; overflow: hidden; }
 
         .search-row input {
             flex: 1;
@@ -120,102 +112,64 @@
             padding: 12px 16px;
             font-size: 0.95rem;
             font-family: var(--font);
-            color: var(--text-dark);
+            color: inherit;
             outline: none;
         }
-
-        .search-row input::placeholder { color: var(--text-muted); }
+        .search-row input::placeholder { color: rgba(255,255,255,0.45); }
+        body.day-mode .search-row input { color: var(--text-dark); }
+        body.day-mode .search-row input::placeholder { color: var(--text-muted); }
 
         .search-row button {
             background: transparent;
             border: none;
-            border-left: 1px solid rgba(148,163,184,0.3);
+            border-left: 1px solid rgba(255,255,255,0.15);
             padding: 0 16px;
             cursor: pointer;
-            color: var(--text-muted);
+            color: rgba(255,255,255,0.5);
             font-size: 0.95rem;
             transition: color 0.2s;
         }
-
-        .search-row button:hover { color: var(--text-dark); }
+        .search-row button:hover { color: #fff; }
+        body.day-mode .search-row button { color: var(--text-muted); border-color: rgba(0,0,0,0.1); }
 
         .geo-btn {
-            width: 44px;
-            height: 44px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 44px; height: 44px;
+            display: flex; align-items: center; justify-content: center;
             cursor: pointer;
-            color: var(--text-muted);
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius);
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            transition: color 0.2s, border-color 0.2s;
+            color: rgba(255,255,255,0.5);
             font-size: 1rem;
             flex-shrink: 0;
+            transition: color 0.2s, border-color 0.2s;
         }
+        .geo-btn:hover { color: #fff; border-color: rgba(255,255,255,0.4); }
+        body.day-mode .geo-btn { color: var(--text-muted); }
 
-        .geo-btn:hover {
-            color: var(--text-dark);
-            border-color: rgba(148,163,184,0.5);
-        }
-
-        .back-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.8rem;
-            margin-right: auto;
-            white-space: nowrap;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover { color: var(--text-dark); }
-
-        /* Recent searches dropdown */
+        /* Recent dropdown */
         .recent-list {
             list-style: none;
             position: absolute;
             top: calc(100% + 4px);
-            left: 0;
-            width: 100%;
-            background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--border-subtle);
-            border-radius: var(--radius);
+            left: 0; width: 100%;
             z-index: 20;
             overflow: hidden;
         }
-
         .recent-list li {
             padding: 10px 16px;
             font-size: 0.88rem;
             cursor: pointer;
-            border-bottom: 1px solid rgba(148,163,184,0.2);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             transition: background 0.15s;
         }
-
         .recent-list li:last-child { border-bottom: none; }
-        .recent-list li:hover { background: rgba(255,255,255,0.45); }
+        .recent-list li:hover { background: rgba(255,255,255,0.15); }
 
-        /* Status messages */
-        .status-msg {
-            text-align: center;
-            font-size: 0.85rem;
-            margin-top: 6px;
-        }
-
-        .status-msg.error { color: #b91c1c; }
-        .status-msg.loading { color: var(--text-muted); }
-
+        .status-msg { text-align: center; font-size: 0.85rem; margin-top: 6px; }
+        .status-msg.error { color: #fca5a5; }
+        body.day-mode .status-msg.error { color: #b91c1c; }
+        .status-msg.loading { color: rgba(255,255,255,0.6); }
         .hidden { display: none !important; }
 
-
-        /* ============================================
-           MAIN GRID — 38% / 62% split
-           ============================================ */
+        /* ---- WEATHER GRID ---- */
         .weather-grid {
             display: grid;
             grid-template-columns: 38% 62%;
@@ -223,219 +177,107 @@
             align-items: start;
         }
 
+        /* Left panel */
+        .left-panel { display: flex; flex-direction: column; padding: 24px; }
 
-        /* ---- LEFT PANEL ---- */
-        .left-panel {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .city-name {
-            font-size: 1.45rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
+        .city-name { font-size: 1.45rem; font-weight: 600; margin-bottom: 4px; }
 
         .condition-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-muted);
+            display: flex; align-items: center; gap: 8px;
+            color: rgba(255,255,255,0.6);
             font-size: 1.05rem;
             text-transform: capitalize;
             margin-bottom: 20px;
         }
-
         .condition-row i { font-size: 1.1rem; }
 
-        .big-temp {
-            font-size: 5rem;
-            font-weight: 300;
-            line-height: 1;
-            margin-bottom: 4px;
-            letter-spacing: -2px;
-        }
+        .big-temp { font-size: 5rem; font-weight: 300; line-height: 1; letter-spacing: -2px; }
+        .big-unit { font-size: 1.6rem; font-weight: 400; color: rgba(255,255,255,0.5); vertical-align: top; letter-spacing: 0; }
+        body.day-mode .big-unit { color: var(--text-muted); }
 
-        .big-unit {
-            font-size: 1.6rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            vertical-align: top;
-            letter-spacing: 0;
-        }
-
-        /* Segmented °C / °F toggle */
         .unit-toggle {
             display: inline-flex;
-            border: 1px solid rgba(148,163,184,0.35);
+            border: 1px solid rgba(255,255,255,0.2);
             border-radius: 8px;
             overflow: hidden;
             margin: 16px 0 28px;
-            background: rgba(255,255,255,0.3);
+            background: rgba(255,255,255,0.08);
         }
+        body.day-mode .unit-toggle { border-color: rgba(0,0,0,0.12); background: rgba(0,0,0,0.04); }
 
         .unit-btn {
-            background: transparent;
-            border: none;
-            padding: 6px 14px;
-            font-size: 0.85rem;
-            font-family: var(--font);
-            cursor: pointer;
-            color: var(--text-muted);
+            background: transparent; border: none;
+            padding: 6px 14px; font-size: 0.85rem;
+            font-family: var(--font); cursor: pointer;
+            color: rgba(255,255,255,0.5);
             transition: background 0.2s, color 0.2s;
         }
+        .unit-btn.active { background: #fff; color: #1e293b; border-radius: 6px; }
+        .unit-btn:not(.active):hover { background: rgba(255,255,255,0.1); }
 
-        .unit-btn.active {
-            background: var(--text-dark);
-            color: #fff;
-            border-radius: 6px;
-        }
+        .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+        .metric { display: flex; flex-direction: column; border-left: 2px solid rgba(255,255,255,0.15); padding-left: 10px; }
+        body.day-mode .metric { border-color: rgba(0,0,0,0.1); }
+        .metric-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.06em; color: rgba(255,255,255,0.45); margin-bottom: 2px; font-weight: 500; }
+        .metric-val { font-size: 1.05rem; font-weight: 500; }
 
-        .unit-btn:not(.active):hover { background: rgba(0,0,0,0.04); }
-
-        /* Mini metrics grid — 2 columns */
-        .metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 18px;
-        }
-
-        .metric {
-            display: flex;
-            flex-direction: column;
-            border-left: 2px solid rgba(148,163,184,0.3);
-            padding-left: 10px;
-        }
-
-        .metric-label {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            margin-bottom: 2px;
-            font-weight: 500;
-        }
-
-        .metric-val {
-            font-size: 1.05rem;
-            font-weight: 500;
-        }
-
-
-        /* ---- RIGHT PANEL ---- */
-        .right-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .forecast-card {
-            /* inherits .glass via HTML class */
-        }
-
+        /* Right panel */
+        .right-panel { display: flex; flex-direction: column; gap: 20px; }
+        .forecast-card { padding: 24px; }
         .forecast-label {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: var(--text-muted);
-            font-weight: 500;
-            border-bottom: 1px solid rgba(148,163,184,0.25);
-            padding-bottom: 8px;
-            margin-bottom: 14px;
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;
+            color: rgba(255,255,255,0.4); font-weight: 500;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px; margin-bottom: 14px;
         }
 
-        /* Hourly — horizontal scroll */
-        .hourly-scroll {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 6px;
-            scrollbar-width: thin;
-        }
-
+        .hourly-scroll { display: flex; gap: 20px; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
         .hourly-scroll::-webkit-scrollbar { height: 3px; }
-        .hourly-scroll::-webkit-scrollbar-thumb { background: rgba(148,163,184,0.3); border-radius: 4px; }
-
-        .hourly-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            min-width: 56px;
-            flex-shrink: 0;
-        }
-
-        .hourly-time { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; }
-        .hourly-icon { font-size: 1.15rem; color: var(--text-dark); }
+        .hourly-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 4px; }
+        .hourly-item { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 56px; flex-shrink: 0; }
+        .hourly-time { font-size: 0.8rem; color: rgba(255,255,255,0.5); font-weight: 500; }
+        .hourly-icon { font-size: 1.15rem; }
         .hourly-temp { font-size: 0.95rem; font-weight: 500; }
 
-        /* Daily — stacked rows */
-        .daily-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(148,163,184,0.2);
-        }
-
+        .daily-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
         .daily-row:last-child { border-bottom: none; }
-
         .daily-day { flex: 1; font-weight: 500; font-size: 0.92rem; }
-        .daily-icon { flex: 0 0 36px; text-align: center; font-size: 1rem; color: var(--text-muted); }
+        .daily-icon { flex: 0 0 36px; text-align: center; font-size: 1rem; color: rgba(255,255,255,0.5); }
         .daily-temps { flex: 1; text-align: right; font-size: 0.92rem; }
         .daily-hi { font-weight: 600; margin-right: 6px; }
-        .daily-lo { color: var(--text-muted); }
+        .daily-lo { color: rgba(255,255,255,0.4); }
 
-
-        /* ============================================
-           RESPONSIVE — stack on mobile
-           ============================================ */
         @media (max-width: 768px) {
-            .weather-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .top-bar {
-                flex-wrap: wrap;
-            }
-
+            .weather-grid { grid-template-columns: 1fr; }
+            .top-bar { flex-wrap: wrap; }
             .search-area { max-width: none; }
-
             .left-panel { padding: 20px; }
             .forecast-card { padding: 18px; }
-
             .big-temp { font-size: 3.8rem; }
-
             .back-link { width: 100%; margin-bottom: 6px; }
         }
     </style>
 </head>
-<body class="theme-clouds">
+<body>
 
-    <!-- Live weather canvas wallpaper -->
-    <canvas id="weatherCanvas"></canvas>
+    <canvas id="skyCanvas"></canvas>
 
     <div class="app-shell">
-
-        <!-- Top bar: back link + search + geolocation -->
         <div class="top-bar">
             <a href="../index.html" class="back-link"><i class="fa-solid fa-arrow-left"></i> Back to Projects</a>
             <div class="search-area glass search-row" id="searchArea">
                 <form id="searchForm" style="display:contents;">
                     <input type="text" id="cityInput" placeholder="Search any city..." autocomplete="off" required>
-                    <button type="submit" id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>
-                <ul id="recentList" class="recent-list hidden"></ul>
+                <ul id="recentList" class="recent-list glass hidden"></ul>
             </div>
-            <button class="geo-btn" id="geoBtn" title="Use my location"><i class="fa-solid fa-location-crosshairs"></i></button>
+            <button class="geo-btn glass" id="geoBtn" title="Use my location"><i class="fa-solid fa-location-crosshairs"></i></button>
         </div>
 
         <div id="statusMsg" class="status-msg hidden"></div>
 
-        <!-- Main weather grid (hidden until data loads) -->
         <div id="weatherGrid" class="weather-grid hidden">
-
-            <!-- Left panel — current conditions -->
             <div class="left-panel glass">
                 <h1 class="city-name" id="cityName">--</h1>
                 <div class="condition-row">
@@ -451,682 +293,681 @@
                     <button class="unit-btn" data-unit="f">&deg;F</button>
                 </div>
                 <div class="metrics">
-                    <div class="metric">
-                        <span class="metric-label">Feels like</span>
-                        <span class="metric-val" id="feelsLike">--</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Humidity</span>
-                        <span class="metric-val" id="humidity">--</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Wind</span>
-                        <span class="metric-val" id="wind">--</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Pressure</span>
-                        <span class="metric-val" id="pressure">--</span>
-                    </div>
+                    <div class="metric"><span class="metric-label">Feels like</span><span class="metric-val" id="feelsLike">--</span></div>
+                    <div class="metric"><span class="metric-label">Humidity</span><span class="metric-val" id="humidity">--</span></div>
+                    <div class="metric"><span class="metric-label">Wind</span><span class="metric-val" id="wind">--</span></div>
+                    <div class="metric"><span class="metric-label">Pressure</span><span class="metric-val" id="pressure">--</span></div>
                 </div>
             </div>
-
-            <!-- Right panel — forecasts -->
             <div class="right-panel">
                 <div class="forecast-card glass">
                     <div class="forecast-label">Hourly Forecast</div>
-                    <div class="hourly-scroll" id="hourlyScroll">
-                        <!-- JS injects hourly items -->
-                    </div>
+                    <div class="hourly-scroll" id="hourlyScroll"></div>
                 </div>
                 <div class="forecast-card glass">
                     <div class="forecast-label">5-Day Forecast</div>
-                    <div id="dailyList">
-                        <!-- JS injects daily rows -->
-                    </div>
+                    <div id="dailyList"></div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <script>
-    // ============================================================
-    //  WEATHER DASHBOARD — Complete Application Script
-    //  Handles: API calls, rendering, unit conversion, recent
-    //  searches, geolocation, and the interactive canvas wallpaper.
-    // ============================================================
+<script>
+// ============================================================
+//  BEAUTIFUL ANIMATED SKY WEATHER DASHBOARD
+//  Features: layered sky gradients, fluffy animated clouds,
+//  twinkling stars, rain/snow/lightning, mouse interaction,
+//  and real weather data from Open-Meteo (no API key needed).
+// ============================================================
 
-    // ---- Replace with your OpenWeatherMap API key ----
-    const API_KEY = '4a841aa36e4bba3e12bc46e47c63d4d1';
+const canvas = document.getElementById('skyCanvas');
+const ctx = canvas.getContext('2d');
+const $ = id => document.getElementById(id);
+
+// ---- State ----
+let unit = 'c';
+let rawData = null;
+let currentCondition = 'clouds';
+let isDay = 1;
+let mouse = { x: -9999, y: -9999 };
+let tabVisible = true;
+
+// ---- Particle arrays (declared early to avoid TDZ errors) ----
+let stars = [];
+let clouds = [];
+let rainDrops = [];
+let snowflakes = [];
+let shootingStars = [];
+let flashBright = 0;
+let nextFlash = Date.now() + 3000;
+let celestialAngle = 0;
+let currentSky = ['#64748b', '#94a3b8', '#cbd5e1'];
+let targetSky = ['#64748b', '#94a3b8', '#cbd5e1'];
+let skyLerp = 1;
+
+document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+document.addEventListener('visibilitychange', () => { tabVisible = !document.hidden; });
 
 
-    // ---- Global State ----
-    let unit = 'c';                // current temp unit
-    let rawData = null;            // cached API responses for re-render
-    let activeTheme = 'clouds';    // current wallpaper theme
+// ============================================================
+//  SKY RENDERING — Gradient backgrounds
+// ============================================================
 
+// Sky color palettes: [top, middle, bottom]
+const skyColors = {
+    clear_day:    ['#2563eb', '#60a5fa', '#fcd34d'],
+    clear_night:  ['#0f172a', '#1e1b4b', '#312e81'],
+    clouds_day:   ['#64748b', '#94a3b8', '#cbd5e1'],
+    clouds_night: ['#1e293b', '#334155', '#475569'],
+    rain_day:     ['#475569', '#64748b', '#94a3b8'],
+    rain_night:   ['#0f172a', '#1e293b', '#334155'],
+    snow_day:     ['#e0e7ff', '#c7d2fe', '#ddd6fe'],
+    snow_night:   ['#1e1b4b', '#312e81', '#3730a3'],
+    thunder_day:  ['#1e293b', '#334155', '#475569'],
+    thunder_night:['#0c0a1a', '#1a1333', '#261d4d'],
+};
 
-    // ---- DOM Handles ----
-    const $ = (id) => document.getElementById(id);
-    const cityInput    = $('cityInput');
-    const searchForm   = $('searchForm');
-    const geoBtn       = $('geoBtn');
-    const statusMsg    = $('statusMsg');
-    const weatherGrid  = $('weatherGrid');
-    const recentListEl = $('recentList');
+currentSky = skyColors.clouds_day;
+targetSky = skyColors.clouds_day;
+skyLerp = 1;
 
+function lerpColor(a, b, t) {
+    // Parse hex to RGB, lerp, return hex
+    const ar = parseInt(a.slice(1,3),16), ag = parseInt(a.slice(3,5),16), ab = parseInt(a.slice(5,7),16);
+    const br = parseInt(b.slice(1,3),16), bg = parseInt(b.slice(3,5),16), bb = parseInt(b.slice(5,7),16);
+    const r = Math.round(ar + (br - ar) * t);
+    const g = Math.round(ag + (bg - ag) * t);
+    const bl = Math.round(ab + (bb - ab) * t);
+    return `rgb(${r},${g},${bl})`;
+}
 
-    // ============================================================
-    //  SECTION 1: CANVAS PARTICLE WALLPAPER
-    //  Renders weather-appropriate particles on a full-viewport
-    //  canvas behind the glass UI. Each condition has its own
-    //  particle class with unique physics and mouse interaction.
-    // ============================================================
-
-    const canvas = $('weatherCanvas');
-    const ctx    = canvas.getContext('2d');
-
-    // Mouse tracking for interactive particle behavior
-    let mouse = { x: -9999, y: -9999 };
-    document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-    document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-
-    function resizeCanvas() {
-        canvas.width  = window.innerWidth;
-        canvas.height = window.innerHeight;
+function drawSky() {
+    let top, mid, bot;
+    if (skyLerp >= 1) {
+        [top, mid, bot] = currentSky;
+    } else {
+        top = lerpColor(currentSky[0], targetSky[0], skyLerp);
+        mid = lerpColor(currentSky[1], targetSky[1], skyLerp);
+        bot = lerpColor(currentSky[2], targetSky[2], skyLerp);
     }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
+    const grad = ctx.createLinearGradient(0, 0, 0, canvas.height);
+    grad.addColorStop(0, top);
+    grad.addColorStop(0.55, mid);
+    grad.addColorStop(1, bot);
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function setSky(condition, dayFlag) {
+    const key = condition + (dayFlag ? '_day' : '_night');
+    const newSky = skyColors[key] || skyColors.clouds_day;
+    if (newSky === targetSky) return;
+    currentSky = targetSky.map((c, i) => {
+        if (skyLerp >= 1) return c;
+        return lerpColor(currentSky[i], targetSky[i], skyLerp);
+    });
+    if (currentSky[0].startsWith('#')) { /* already hex, fine */ }
+    targetSky = newSky;
+    skyLerp = 0;
+
+    // Update body class for glass panel colors
+    document.body.className = dayFlag ? 'day-mode' : '';
+}
 
 
-    // Background gradient palettes for each weather theme.
-    // Drawn on canvas each frame, replacing solid CSS backgrounds.
-    const bgGradients = {
-        clear:   ['#fdf6e3', '#fceabb', '#f8d97a'],
-        clouds:  ['#e4eaf1', '#d0d8e2', '#bcc7d4'],
-        rain:    ['#bcc8d6', '#9fb0c2', '#839db0'],
-        snow:    ['#ecf0f5', '#dee4ec', '#cfd7e1'],
-        thunder: ['#8e9fad', '#6e8292', '#4f6474'],
-    };
+// ============================================================
+//  STARS — twinkling dots across the sky (visible at night)
+// ============================================================
+
+// stars array declared at top of script
+
+function initStars() {
+    stars = [];
+    const count = Math.floor((canvas.width * canvas.height) / 3000);
+    for (let i = 0; i < count; i++) {
+        stars.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height * 0.7,
+            r: 0.3 + Math.random() * 1.8,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.008 + Math.random() * 0.025,
+            baseOpacity: 0.3 + Math.random() * 0.7,
+        });
+    }
+}
+
+function drawStars() {
+    // Stars are only visible at night
+    const nightFactor = isDay ? 0 : 1;
+    if (nightFactor === 0) return;
+
+    for (const s of stars) {
+        s.phase += s.speed;
+        const twinkle = 0.4 + 0.6 * Math.sin(s.phase);
+        const opacity = s.baseOpacity * twinkle * nightFactor;
+
+        // Outer glow
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
+        const glow = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, s.r * 3);
+        glow.addColorStop(0, `rgba(200, 220, 255, ${opacity * 0.3})`);
+        glow.addColorStop(1, 'rgba(200, 220, 255, 0)');
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        // Bright core
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(240, 248, 255, ${opacity})`;
+        ctx.fill();
+    }
+}
 
 
-    // ---- Particle Base Class ----
-    // Stores position, velocity, size, opacity. All weather
-    // particle types inherit from this.
-    class Particle {
-        constructor(x, y, vx, vy, size, opacity) {
-            this.x = x;  this.y = y;
-            this.vx = vx; this.vy = vy;
-            this.size = size; this.opacity = opacity;
-        }
+// ============================================================
+//  CLOUDS — big, fluffy, layered cloud shapes
+//  Multiple overlapping circles create realistic cloud forms.
+//  They drift across the sky and gently push away from mouse.
+// ============================================================
+
+// clouds array declared at top of script
+
+function createCloud(forceX) {
+    const w = canvas.width;
+    const h = canvas.height;
+    const baseSize = 50 + Math.random() * 100;
+    const y = Math.random() * h * 0.55 + h * 0.05;
+    const speed = 0.15 + Math.random() * 0.45;
+    const opacity = 0.25 + Math.random() * 0.45;
+    const x = forceX !== undefined ? forceX : Math.random() * (w + 400) - 200;
+
+    // Each cloud is made of 5-8 overlapping circles for a fluffy shape
+    const puffs = [];
+    const puffCount = 5 + Math.floor(Math.random() * 4);
+    for (let i = 0; i < puffCount; i++) {
+        puffs.push({
+            ox: (i - puffCount/2) * baseSize * 0.55 + (Math.random() - 0.5) * baseSize * 0.3,
+            oy: (Math.random() - 0.5) * baseSize * 0.5,
+            r: baseSize * (0.5 + Math.random() * 0.5),
+        });
     }
 
+    return { x, y, speed, opacity, puffs, baseSize };
+}
 
-    // ---- RAIN DROP ----
-    // Thin diagonal streaks falling fast. Push AWAY from cursor
-    // to simulate wind pressure deflecting droplets.
-    class RainDrop extends Particle {
-        constructor() {
-            super(
-                Math.random() * (canvas.width + 200) - 100,
-                Math.random() * -canvas.height,
-                -1.2 - Math.random() * 1.5,           // wind drift left
-                9 + Math.random() * 6,                 // fast fall
-                0.8 + Math.random() * 1.2,             // thin streak
-                0.15 + Math.random() * 0.3             // subtle opacity
-            );
-            this.len = 14 + Math.random() * 18;
+function initClouds() {
+    clouds = [];
+    for (let i = 0; i < 12; i++) {
+        clouds.push(createCloud());
+    }
+    // Sort by opacity for depth layering (farther clouds dimmer)
+    clouds.sort((a, b) => a.opacity - b.opacity);
+}
+
+function drawClouds() {
+    for (const c of clouds) {
+        c.x += c.speed;
+
+        // Mouse repulsion — clouds drift away from cursor
+        const dx = c.x - mouse.x;
+        const dy = c.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 250 && dist > 1) {
+            const force = ((250 - dist) / 250) * 0.6;
+            c.x += (dx / dist) * force;
+            c.y += (dy / dist) * force * 0.3;
         }
-        update() {
-            // Push drops away from cursor
-            const dx = this.x - mouse.x;
-            const dy = this.y - mouse.y;
-            const d  = Math.sqrt(dx * dx + dy * dy);
-            if (d < 110 && d > 0) {
-                this.x += (dx / d) * ((110 - d) / 110) * 3.5;
-            }
-            this.x += this.vx;
-            this.y += this.vy;
+
+        // Reset when off right edge
+        if (c.x > canvas.width + c.baseSize * 4) {
+            c.x = -c.baseSize * 4;
+            c.y = Math.random() * canvas.height * 0.55 + canvas.height * 0.05;
         }
-        draw() {
+
+        // Draw fluffy puffs
+        const dayAlpha = isDay ? 1 : 0.35;
+        for (const p of c.puffs) {
+            const px = c.x + p.ox;
+            const py = c.y + p.oy;
+            const grad = ctx.createRadialGradient(px, py, p.r * 0.1, px, py, p.r);
+            const baseColor = isDay ? '255,255,255' : '180,190,210';
+            grad.addColorStop(0, `rgba(${baseColor}, ${c.opacity * dayAlpha})`);
+            grad.addColorStop(0.6, `rgba(${baseColor}, ${c.opacity * 0.4 * dayAlpha})`);
+            grad.addColorStop(1, `rgba(${baseColor}, 0)`);
             ctx.beginPath();
-            ctx.moveTo(this.x, this.y);
-            ctx.lineTo(this.x + this.vx * 1.8, this.y + this.len);
-            ctx.strokeStyle = `rgba(195,215,235,${this.opacity})`;
-            ctx.lineWidth = this.size;
-            ctx.lineCap = 'round';
-            ctx.stroke();
-        }
-        offscreen() { return this.y > canvas.height + 40; }
-        reset() {
-            this.x = Math.random() * (canvas.width + 200) - 100;
-            this.y = -20 - Math.random() * 200;
-        }
-    }
-
-
-    // ---- SNOWFLAKE ----
-    // Soft white circles drifting down slowly with sinusoidal
-    // horizontal wobble. Gently ATTRACT toward cursor.
-    class Snowflake extends Particle {
-        constructor() {
-            super(
-                Math.random() * canvas.width,
-                Math.random() * -canvas.height,
-                -0.4 + Math.random() * 0.8,
-                0.4 + Math.random() * 1.4,
-                1.5 + Math.random() * 3.5,
-                0.45 + Math.random() * 0.35
-            );
-            this.phase = Math.random() * Math.PI * 2;
-            this.drift = 0.01 + Math.random() * 0.02;
-        }
-        update() {
-            this.phase += this.drift;
-            this.x += this.vx + Math.sin(this.phase) * 0.45;
-            this.y += this.vy;
-            // Attract toward cursor
-            const dx = mouse.x - this.x;
-            const dy = mouse.y - this.y;
-            const d  = Math.sqrt(dx * dx + dy * dy);
-            if (d < 140 && d > 1) {
-                const f = ((140 - d) / 140) * 0.7;
-                this.x += (dx / d) * f;
-                this.y += (dy / d) * f;
-            }
-        }
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+            ctx.arc(px, py, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
             ctx.fill();
         }
-        offscreen() { return this.y > canvas.height + 15; }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = -8 - Math.random() * 40;
-        }
     }
+}
+
+initClouds();
 
 
-    // ---- CLOUD BLOB ----
-    // Large soft blobs using radial gradients, drifting right.
-    // Move AWAY from cursor for a parallax depth effect.
-    class CloudBlob extends Particle {
-        constructor() {
-            const sz = 70 + Math.random() * 150;
-            super(
-                Math.random() * (canvas.width + sz) - sz / 2,
-                Math.random() * canvas.height * 0.75,
-                0.12 + Math.random() * 0.3,
-                0,
-                sz,
-                0.05 + Math.random() * 0.09
-            );
-        }
-        update() {
-            this.x += this.vx;
-            const dx = this.x - mouse.x;
-            const dy = this.y - mouse.y;
-            const d  = Math.sqrt(dx * dx + dy * dy);
-            if (d < 180 && d > 1) {
-                const f = ((180 - d) / 180) * 0.35;
-                this.x += (dx / d) * f;
-                this.y += (dy / d) * f * 0.25;
-            }
-        }
-        draw() {
-            const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
-            g.addColorStop(0, `rgba(255,255,255,${this.opacity})`);
-            g.addColorStop(1, 'rgba(255,255,255,0)');
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = g;
-            ctx.fill();
-        }
-        offscreen() { return this.x > canvas.width + this.size; }
-        reset() {
-            this.x  = -this.size;
-            this.y  = Math.random() * canvas.height * 0.75;
-            this.vx = 0.12 + Math.random() * 0.3;
-        }
-    }
+// ============================================================
+//  SUN / MOON — celestial body in the sky
+// ============================================================
 
+// celestialAngle declared at top of script
 
-    // ---- SUN DUST (Clear Sky) ----
-    // Warm glowing particles floating gently upward with a
-    // pulsing twinkle effect. No direct mouse interaction.
-    class SunDust extends Particle {
-        constructor() {
-            super(
-                Math.random() * canvas.width,
-                Math.random() * canvas.height,
-                -0.15 + Math.random() * 0.3,
-                -0.15 - Math.random() * 0.4,
-                1.2 + Math.random() * 2.5,
-                0.12 + Math.random() * 0.28
-            );
-            this.pulse = Math.random() * Math.PI * 2;
-        }
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-            this.pulse += 0.018;
-            this._op = this.opacity * (0.55 + 0.45 * Math.sin(this.pulse));
-        }
-        draw() {
-            const g = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 3);
-            g.addColorStop(0, `rgba(240,195,70,${this._op})`);
-            g.addColorStop(1, 'rgba(240,195,70,0)');
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
-            ctx.fillStyle = g;
-            ctx.fill();
-            // bright core
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255,215,100,${this._op})`;
-            ctx.fill();
-        }
-        offscreen() { return this.y < -15; }
-        reset() {
-            this.x = Math.random() * canvas.width;
-            this.y = canvas.height + 8;
-        }
-    }
+function drawCelestial() {
+    celestialAngle += 0.0008;
+    const cx = canvas.width - 140;
+    const cy = 120;
 
+    if (isDay) {
+        // SUN — warm glowing orb with light rays
+        // Outer glow
+        const outerGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 180);
+        outerGlow.addColorStop(0, 'rgba(255, 220, 100, 0.3)');
+        outerGlow.addColorStop(0.5, 'rgba(255, 200, 50, 0.08)');
+        outerGlow.addColorStop(1, 'rgba(255, 200, 50, 0)');
+        ctx.beginPath();
+        ctx.arc(cx, cy, 180, 0, Math.PI * 2);
+        ctx.fillStyle = outerGlow;
+        ctx.fill();
 
-    // ---- Particle System State ----
-    let particles     = [];
-    let nextParticles = [];
-    let isTransition  = false;
-    let transAlpha    = 1;
-
-    // Lightning flash state (thunderstorm only)
-    let flashBright   = 0;
-    let nextFlash     = 0;
-
-    // Sun ray rotation (clear sky only)
-    let rayAngle      = 0;
-
-
-    // Create a full particle set for the given theme
-    function createParticles(theme) {
-        const arr = [];
-        switch (theme) {
-            case 'rain':
-            case 'thunder':
-                for (let i = 0; i < 200; i++) {
-                    const p = new RainDrop();
-                    p.y = Math.random() * canvas.height;
-                    arr.push(p);
-                }
-                if (theme === 'thunder') {
-                    nextFlash = Date.now() + 2000 + Math.random() * 3000;
-                }
-                break;
-            case 'snow':
-                for (let i = 0; i < 150; i++) {
-                    const p = new Snowflake();
-                    p.y = Math.random() * canvas.height;
-                    arr.push(p);
-                }
-                break;
-            case 'clouds':
-                for (let i = 0; i < 20; i++) arr.push(new CloudBlob());
-                break;
-            case 'clear':
-            default:
-                for (let i = 0; i < 50; i++) {
-                    const p = new SunDust();
-                    p.y = Math.random() * canvas.height;
-                    arr.push(p);
-                }
-                break;
-        }
-        return arr;
-    }
-
-
-    // Smoothly transition to a new weather theme
-    function setTheme(theme) {
-        if (theme === activeTheme && particles.length > 0) return;
-        activeTheme    = theme;
-        nextParticles  = createParticles(theme);
-        isTransition   = true;
-        transAlpha     = 0;
-    }
-
-    // Draw the vertical gradient background
-    function drawBg() {
-        const cols = bgGradients[activeTheme] || bgGradients.clouds;
-        const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        g.addColorStop(0, cols[0]);
-        g.addColorStop(0.5, cols[1]);
-        g.addColorStop(1, cols[2]);
-        ctx.fillStyle = g;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-
-    // Draw subtle rotating sun rays (clear sky only)
-    function drawSunRays() {
-        if (activeTheme !== 'clear') return;
-        rayAngle += 0.0015;
-        const cx = canvas.width - 70, cy = 70;
+        // Light rays
         ctx.save();
         ctx.translate(cx, cy);
-        ctx.rotate(rayAngle);
-        for (let i = 0; i < 14; i++) {
-            const a = (i / 14) * Math.PI * 2;
-            const len = 220 + Math.sin(rayAngle * 2.5 + i) * 40;
+        ctx.rotate(celestialAngle);
+        for (let i = 0; i < 16; i++) {
+            const a = (i / 16) * Math.PI * 2;
+            const len = 130 + Math.sin(celestialAngle * 3 + i * 0.7) * 30;
             ctx.beginPath();
             ctx.moveTo(0, 0);
             ctx.lineTo(Math.cos(a) * len, Math.sin(a) * len);
-            ctx.lineTo(Math.cos(a + 0.12) * len, Math.sin(a + 0.12) * len);
+            ctx.lineTo(Math.cos(a + 0.08) * len * 0.9, Math.sin(a + 0.08) * len * 0.9);
             ctx.closePath();
-            ctx.fillStyle = 'rgba(255,225,130,0.035)';
+            ctx.fillStyle = 'rgba(255, 230, 140, 0.06)';
             ctx.fill();
         }
         ctx.restore();
-    }
 
-    // Lightning flash overlay for thunderstorms
-    function doLightning() {
-        if (activeTheme !== 'thunder') { flashBright = 0; return; }
-        if (Date.now() > nextFlash) {
-            flashBright = 0.65 + Math.random() * 0.35;
-            nextFlash = Date.now() + 4000 + Math.random() * 6000;
-        }
-        if (flashBright > 0) {
-            ctx.fillStyle = `rgba(255,255,255,${flashBright})`;
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            flashBright *= 0.82;
-            if (flashBright < 0.01) flashBright = 0;
-        }
-    }
+        // Sun disc
+        const sunGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 45);
+        sunGrad.addColorStop(0, 'rgba(255, 245, 200, 0.95)');
+        sunGrad.addColorStop(0.7, 'rgba(255, 220, 100, 0.7)');
+        sunGrad.addColorStop(1, 'rgba(255, 200, 50, 0.2)');
+        ctx.beginPath();
+        ctx.arc(cx, cy, 45, 0, Math.PI * 2);
+        ctx.fillStyle = sunGrad;
+        ctx.fill();
+    } else {
+        // MOON — pale silver crescent
+        const moonGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 120);
+        moonGlow.addColorStop(0, 'rgba(200, 210, 240, 0.15)');
+        moonGlow.addColorStop(1, 'rgba(200, 210, 240, 0)');
+        ctx.beginPath();
+        ctx.arc(cx, cy, 120, 0, Math.PI * 2);
+        ctx.fillStyle = moonGlow;
+        ctx.fill();
 
+        // Moon disc
+        ctx.beginPath();
+        ctx.arc(cx, cy, 35, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(220, 230, 250, 0.9)';
+        ctx.fill();
 
-    // ---- Main Render Loop (60 fps via requestAnimationFrame) ----
-    let tabVisible = true;
-
-    function frame() {
-        requestAnimationFrame(frame);
-        if (!tabVisible) return;
-
-        drawBg();
-        drawSunRays();
-
-        // Handle transition crossfade
-        if (isTransition) {
-            transAlpha += 0.025;
-            if (transAlpha >= 1) {
-                transAlpha = 1;
-                isTransition = false;
-                particles = nextParticles;
-                nextParticles = [];
-            }
-        }
-
-        // Old particles fade out
-        if (isTransition && particles.length) {
-            ctx.globalAlpha = 1 - transAlpha;
-            for (const p of particles) { p.update(); p.draw(); }
-        }
-
-        // Active particles
-        ctx.globalAlpha = isTransition ? transAlpha : 1;
-        const active = isTransition ? nextParticles : particles;
-        for (const p of active) {
-            p.update();
-            p.draw();
-            if (p.offscreen()) p.reset();
-        }
+        // Crescent shadow
+        ctx.beginPath();
+        ctx.arc(cx + 12, cy - 8, 30, 0, Math.PI * 2);
+        ctx.fillStyle = lerpColor(currentSky[0] || '#0f172a', '#0f172a', 0.5);
+        ctx.globalAlpha = 0.85;
+        ctx.fill();
         ctx.globalAlpha = 1;
-
-        doLightning();
     }
-
-    // Pause when tab is hidden
-    document.addEventListener('visibilitychange', () => { tabVisible = !document.hidden; });
-
-    // Boot the wallpaper with default cloud theme
-    particles = createParticles('clouds');
-    frame();
+}
 
 
-    // ============================================================
-    //  SECTION 2: WEATHER APP LOGIC
-    //  API calls, search, geolocation, recent searches, rendering.
-    // ============================================================
+// ============================================================
+//  RAIN PARTICLES — streaks that push away from cursor
+// ============================================================
 
-    // ---- Unit Conversion ----
-    function toUnit(celsius) {
-        return unit === 'f' ? Math.round(celsius * 9 / 5 + 32) : Math.round(celsius);
-    }
-    function unitLabel() { return unit === 'c' ? '\u00B0C' : '\u00B0F'; }
+// rainDrops array declared at top of script
 
-
-    // ---- Recent Searches (localStorage, max 5) ----
-    function getRecent() { return JSON.parse(localStorage.getItem('wxRecent') || '[]'); }
-
-    function pushRecent(city) {
-        let arr = getRecent().filter(c => c.toLowerCase() !== city.toLowerCase());
-        arr.unshift(city);
-        if (arr.length > 5) arr.pop();
-        localStorage.setItem('wxRecent', JSON.stringify(arr));
-        renderRecent(arr);
-    }
-
-    function renderRecent(arr) {
-        recentListEl.innerHTML = '';
-        if (!arr.length) { recentListEl.classList.add('hidden'); return; }
-        arr.forEach(c => {
-            const li = document.createElement('li');
-            li.textContent = c;
-            li.addEventListener('mousedown', () => {
-                cityInput.value = c;
-                recentListEl.classList.add('hidden');
-                fetchCity(c);
-            });
-            recentListEl.appendChild(li);
+function initRain() {
+    rainDrops = [];
+    for (let i = 0; i < 200; i++) {
+        rainDrops.push({
+            x: Math.random() * (canvas.width + 200) - 100,
+            y: Math.random() * canvas.height,
+            vx: -1.5 - Math.random() * 1.5,
+            vy: 10 + Math.random() * 8,
+            len: 12 + Math.random() * 22,
+            w: 0.8 + Math.random() * 1.2,
+            opacity: 0.12 + Math.random() * 0.25,
         });
     }
+}
 
-    cityInput.addEventListener('focus', () => {
-        const arr = getRecent();
-        if (arr.length) { renderRecent(arr); recentListEl.classList.remove('hidden'); }
-    });
-    cityInput.addEventListener('blur', () => {
-        setTimeout(() => recentListEl.classList.add('hidden'), 180);
-    });
+function drawRain() {
+    if (currentCondition !== 'rain' && currentCondition !== 'thunder') return;
+    for (const d of rainDrops) {
+        // Mouse repulsion
+        const dx = d.x - mouse.x, dy = d.y - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120 && dist > 0) d.x += (dx / dist) * ((120 - dist) / 120) * 4;
 
+        d.x += d.vx;
+        d.y += d.vy;
+        if (d.y > canvas.height + 30) { d.y = -20 - Math.random() * 100; d.x = Math.random() * (canvas.width + 200) - 100; }
 
-    // ---- Status Helpers ----
-    function showStatus(msg, type) {
-        statusMsg.textContent = msg;
-        statusMsg.className = `status-msg ${type}`;
-        statusMsg.classList.remove('hidden');
+        ctx.beginPath();
+        ctx.moveTo(d.x, d.y);
+        ctx.lineTo(d.x + d.vx * 2, d.y + d.len);
+        ctx.strokeStyle = `rgba(180, 210, 240, ${d.opacity})`;
+        ctx.lineWidth = d.w;
+        ctx.lineCap = 'round';
+        ctx.stroke();
     }
-    function hideStatus() { statusMsg.classList.add('hidden'); }
+}
 
 
-    // ---- Search Form ----
-    searchForm.addEventListener('submit', e => {
-        e.preventDefault();
-        const c = cityInput.value.trim();
-        if (c) { recentListEl.classList.add('hidden'); fetchCity(c); }
-    });
+// ============================================================
+//  SNOW PARTICLES — drifting flakes attracted to cursor
+// ============================================================
 
+// snowflakes array declared at top of script
 
-    // ---- Geolocation ----
-    geoBtn.addEventListener('click', () => {
-        if (!navigator.geolocation) return alert('Geolocation not supported.');
-        showStatus('Locating...', 'loading');
-        navigator.geolocation.getCurrentPosition(
-            pos => fetchCoords(pos.coords.latitude, pos.coords.longitude),
-            ()  => showStatus('Location permission denied.', 'error')
-        );
-    });
-
-
-    // ---- Fetch Weather by City Name ----
-    async function fetchCity(city) {
-        showStatus('Fetching weather...', 'loading');
-        try {
-            const [cur, fc] = await Promise.all([
-                fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`).then(r => r.json()),
-                fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&appid=${API_KEY}&units=metric`).then(r => r.json()),
-            ]);
-            if (cur.cod !== 200) throw new Error(cur.message);
-            pushRecent(cur.name);
-            rawData = { cur, fc };
-            render();
-        } catch (err) {
-            showStatus('City not found. Check spelling.', 'error');
-            weatherGrid.classList.add('hidden');
-        }
-    }
-
-    // ---- Fetch Weather by Coordinates ----
-    async function fetchCoords(lat, lon) {
-        showStatus('Fetching weather...', 'loading');
-        try {
-            const [cur, fc] = await Promise.all([
-                fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`).then(r => r.json()),
-                fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`).then(r => r.json()),
-            ]);
-            if (cur.cod !== 200) throw new Error(cur.message);
-            cityInput.value = cur.name;
-            pushRecent(cur.name);
-            rawData = { cur, fc };
-            render();
-        } catch (err) {
-            showStatus('Could not fetch weather data.', 'error');
-        }
-    }
-
-
-    // ---- Render UI from cached data ----
-    function render() {
-        if (!rawData) return;
-        hideStatus();
-        weatherGrid.classList.remove('hidden');
-
-        const { cur, fc } = rawData;
-        const ul = unitLabel();
-
-        // City + condition
-        $('cityName').textContent = `${cur.name}, ${cur.sys.country}`;
-        const cond = mapCondition(cur.weather[0].id, cur.weather[0].main);
-        $('condIcon').className = `fa-solid ${cond.icon}`;
-        $('condText').textContent = cur.weather[0].description;
-
-        // Temperature
-        $('bigTemp').textContent = toUnit(cur.main.temp);
-        $('bigUnit').innerHTML = `&deg;${unit.toUpperCase()}`;
-
-        // Metrics
-        $('feelsLike').textContent = `${toUnit(cur.main.feels_like)}${ul}`;
-        $('humidity').textContent  = `${cur.main.humidity}%`;
-        $('wind').textContent      = `${cur.wind.speed} m/s`;
-        $('pressure').textContent  = `${cur.main.pressure} hPa`;
-
-        // CSS theme fallback + canvas wallpaper
-        document.body.className = `theme-${cond.theme}`;
-        setTheme(cond.theme);
-
-        // ---- Hourly Forecast (next 8 × 3hr slots) ----
-        const hourlyEl = $('hourlyScroll');
-        hourlyEl.innerHTML = '';
-        const slots = fc.list.slice(0, 8);
-        slots.forEach(s => {
-            const time = new Date(s.dt * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            const ic   = mapCondition(s.weather[0].id, s.weather[0].main).icon;
-            const div  = document.createElement('div');
-            div.className = 'hourly-item';
-            div.innerHTML = `
-                <span class="hourly-time">${time}</span>
-                <i class="fa-solid ${ic} hourly-icon"></i>
-                <span class="hourly-temp">${toUnit(s.main.temp)}&deg;</span>`;
-            hourlyEl.appendChild(div);
-        });
-
-        // ---- 5-Day Forecast ----
-        // Group forecast by day and pick one entry per day
-        const dailyEl = $('dailyList');
-        dailyEl.innerHTML = '';
-        const days = {};
-        fc.list.forEach(s => {
-            const key = new Date(s.dt * 1000).toLocaleDateString('en-US', { weekday: 'long' });
-            if (!days[key]) days[key] = { hi: -Infinity, lo: Infinity, id: s.weather[0].id, main: s.weather[0].main };
-            days[key].hi = Math.max(days[key].hi, s.main.temp_max);
-            days[key].lo = Math.min(days[key].lo, s.main.temp_min);
-        });
-
-        // Skip today, show next 5
-        const dayKeys = Object.keys(days).slice(1, 6);
-        dayKeys.forEach(day => {
-            const d  = days[day];
-            const ic = mapCondition(d.id, d.main).icon;
-            const row = document.createElement('div');
-            row.className = 'daily-row';
-            row.innerHTML = `
-                <span class="daily-day">${day}</span>
-                <i class="fa-solid ${ic} daily-icon"></i>
-                <div class="daily-temps">
-                    <span class="daily-hi">${toUnit(d.hi)}&deg;</span>
-                    <span class="daily-lo">${toUnit(d.lo)}&deg;</span>
-                </div>`;
-            dailyEl.appendChild(row);
+function initSnow() {
+    snowflakes = [];
+    for (let i = 0; i < 150; i++) {
+        snowflakes.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: -0.3 + Math.random() * 0.6,
+            vy: 0.4 + Math.random() * 1.5,
+            r: 1.5 + Math.random() * 4,
+            opacity: 0.4 + Math.random() * 0.5,
+            phase: Math.random() * Math.PI * 2,
+            drift: 0.01 + Math.random() * 0.02,
         });
     }
+}
 
+function drawSnow() {
+    if (currentCondition !== 'snow') return;
+    for (const s of snowflakes) {
+        s.phase += s.drift;
+        s.x += s.vx + Math.sin(s.phase) * 0.5;
+        s.y += s.vy;
 
-    // ---- Unit Toggle ----
-    document.querySelectorAll('.unit-btn').forEach(btn => {
-        btn.addEventListener('click', e => {
-            const u = e.target.dataset.unit;
-            if (u === unit) return;
-            unit = u;
-            document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
-            e.target.classList.add('active');
-            render();
-        });
-    });
-
-
-    // ---- Map OWM Condition IDs to icons and canvas themes ----
-    // Uses FontAwesome 6 solid icons — no emojis.
-    function mapCondition(id, main) {
-        let icon = 'fa-sun', theme = 'clear';
-
-        if (id >= 200 && id < 300) {
-            icon = 'fa-bolt';             theme = 'thunder';
-        } else if (id >= 300 && id < 400) {
-            icon = 'fa-cloud-rain';       theme = 'rain';
-        } else if (id >= 500 && id < 600) {
-            icon = 'fa-cloud-showers-heavy'; theme = 'rain';
-        } else if (id >= 600 && id < 700) {
-            icon = 'fa-snowflake';        theme = 'snow';
-        } else if (id >= 700 && id < 800) {
-            icon = 'fa-smog';             theme = 'clouds';
-        } else if (id === 800) {
-            icon = 'fa-sun';              theme = 'clear';
-        } else if (id === 801) {
-            icon = 'fa-cloud-sun';        theme = 'clouds';
-        } else if (id >= 802) {
-            icon = 'fa-cloud';            theme = 'clouds';
+        // Mouse attraction
+        const dx = mouse.x - s.x, dy = mouse.y - s.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 150 && dist > 1) {
+            const f = ((150 - dist) / 150) * 0.8;
+            s.x += (dx / dist) * f;
+            s.y += (dy / dist) * f;
         }
 
-        return { icon, theme };
+        if (s.y > canvas.height + 10) { s.y = -5; s.x = Math.random() * canvas.width; }
+
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${s.opacity})`;
+        ctx.fill();
+    }
+}
+
+
+// ============================================================
+//  LIGHTNING — bright flashes for thunderstorms
+// ============================================================
+
+// flashBright and nextFlash declared at top of script
+
+function drawLightning() {
+    if (currentCondition !== 'thunder') { flashBright = 0; return; }
+    if (Date.now() > nextFlash) {
+        flashBright = 0.6 + Math.random() * 0.4;
+        nextFlash = Date.now() + 4000 + Math.random() * 6000;
+    }
+    if (flashBright > 0) {
+        ctx.fillStyle = `rgba(255, 255, 255, ${flashBright})`;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        flashBright *= 0.8;
+        if (flashBright < 0.01) flashBright = 0;
+    }
+}
+
+
+// ============================================================
+//  SHOOTING STARS — occasional streaks across night sky
+// ============================================================
+
+// shootingStars declared at top of script
+let nextShootingStar = Date.now() + 5000;
+
+function drawShootingStars() {
+    if (isDay) return;
+    const now = Date.now();
+    if (now > nextShootingStar) {
+        shootingStars.push({
+            x: Math.random() * canvas.width * 0.7,
+            y: Math.random() * canvas.height * 0.3,
+            vx: 6 + Math.random() * 4,
+            vy: 2 + Math.random() * 3,
+            life: 1,
+            len: 60 + Math.random() * 80,
+        });
+        nextShootingStar = now + 6000 + Math.random() * 12000;
     }
 
+    for (let i = shootingStars.length - 1; i >= 0; i--) {
+        const ss = shootingStars[i];
+        ss.x += ss.vx;
+        ss.y += ss.vy;
+        ss.life -= 0.02;
 
-    // ---- Boot ----
-    document.addEventListener('DOMContentLoaded', () => {
-        renderRecent(getRecent());
+        if (ss.life <= 0) { shootingStars.splice(i, 1); continue; }
+
+        const tailX = ss.x - ss.vx * (ss.len / ss.vx);
+        const tailY = ss.y - ss.vy * (ss.len / ss.vx);
+        const grad = ctx.createLinearGradient(tailX, tailY, ss.x, ss.y);
+        grad.addColorStop(0, `rgba(255, 255, 255, 0)`);
+        grad.addColorStop(1, `rgba(255, 255, 255, ${ss.life * 0.7})`);
+        ctx.beginPath();
+        ctx.moveTo(tailX, tailY);
+        ctx.lineTo(ss.x, ss.y);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        // Bright head
+        ctx.beginPath();
+        ctx.arc(ss.x, ss.y, 2, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${ss.life})`;
+        ctx.fill();
+    }
+}
+
+
+// ============================================================
+//  MAIN RENDER LOOP
+// ============================================================
+
+function frame() {
+    requestAnimationFrame(frame);
+    if (!tabVisible) return;
+
+    // Advance sky transition
+    if (skyLerp < 1) skyLerp = Math.min(1, skyLerp + 0.012);
+
+    drawSky();
+    drawCelestial();
+    drawStars();
+    drawShootingStars();
+    drawClouds();
+    drawRain();
+    drawSnow();
+    drawLightning();
+}
+
+function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; initStars(); }
+window.addEventListener('resize', resize);
+resize();
+initClouds();
+initRain();
+initSnow();
+frame();
+
+
+// ============================================================
+//  WEATHER API — Open-Meteo (no API key needed)
+// ============================================================
+
+const cityInput   = $('cityInput');
+const searchForm  = $('searchForm');
+const geoBtn      = $('geoBtn');
+const statusMsg   = $('statusMsg');
+const weatherGrid = $('weatherGrid');
+const recentListEl = $('recentList');
+
+function toUnit(c) { return unit === 'f' ? Math.round(c * 9/5 + 32) : Math.round(c); }
+function unitLabel() { return unit === 'c' ? '\u00B0C' : '\u00B0F'; }
+
+// Recent searches
+function getRecent() { return JSON.parse(localStorage.getItem('wxRecent') || '[]'); }
+function pushRecent(city) {
+    let a = getRecent().filter(c => c.toLowerCase() !== city.toLowerCase());
+    a.unshift(city); if (a.length > 5) a.pop();
+    localStorage.setItem('wxRecent', JSON.stringify(a));
+    renderRecent(a);
+}
+function renderRecent(arr) {
+    recentListEl.innerHTML = '';
+    if (!arr.length) { recentListEl.classList.add('hidden'); return; }
+    arr.forEach(c => {
+        const li = document.createElement('li');
+        li.textContent = c;
+        li.addEventListener('mousedown', () => { cityInput.value = c; recentListEl.classList.add('hidden'); fetchCity(c); });
+        recentListEl.appendChild(li);
     });
-    </script>
+}
+cityInput.addEventListener('focus', () => { const a = getRecent(); if (a.length) { renderRecent(a); recentListEl.classList.remove('hidden'); } });
+cityInput.addEventListener('blur', () => { setTimeout(() => recentListEl.classList.add('hidden'), 180); });
 
+function showStatus(msg, type) { statusMsg.textContent = msg; statusMsg.className = `status-msg ${type}`; statusMsg.classList.remove('hidden'); }
+function hideStatus() { statusMsg.classList.add('hidden'); }
+
+searchForm.addEventListener('submit', e => { e.preventDefault(); const c = cityInput.value.trim(); if (c) { recentListEl.classList.add('hidden'); fetchCity(c); } });
+
+geoBtn.addEventListener('click', () => {
+    if (!navigator.geolocation) return alert('Geolocation not supported.');
+    showStatus('Locating...', 'loading');
+    navigator.geolocation.getCurrentPosition(
+        async pos => {
+            try {
+                const { latitude: lat, longitude: lon } = pos.coords;
+                const rev = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`).then(r => r.json());
+                const city = rev.city || rev.locality || 'Unknown';
+                cityInput.value = city;
+                await fetchWeatherData(lat, lon, city, rev.countryCode);
+            } catch { showStatus('Unable to fetch location.', 'error'); }
+        },
+        () => showStatus('Location permission denied.', 'error')
+    );
+});
+
+async function fetchCity(city) {
+    showStatus('Fetching weather...', 'loading');
+    try {
+        const geo = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1&language=en&format=json`).then(r => r.json());
+        if (!geo.results || !geo.results.length) throw new Error();
+        const { latitude, longitude, name, country_code } = geo.results[0];
+        pushRecent(name);
+        await fetchWeatherData(latitude, longitude, name, country_code);
+    } catch { showStatus('City not found. Check spelling.', 'error'); weatherGrid.classList.add('hidden'); }
+}
+
+async function fetchWeatherData(lat, lon, city, country) {
+    try {
+        const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,weather_code,wind_speed_10m,surface_pressure&hourly=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&timezone=auto`;
+        const data = await fetch(url).then(r => r.json());
+        rawData = { city, country, current: data.current, hourly: data.hourly, daily: data.daily };
+        render();
+    } catch { showStatus('Failed to fetch weather data.', 'error'); }
+}
+
+function render() {
+    if (!rawData) return;
+    hideStatus();
+    weatherGrid.classList.remove('hidden');
+    const { city, country, current, hourly, daily } = rawData;
+    const ul = unitLabel();
+
+    $('cityName').textContent = `${city}, ${country || ''}`.replace(/, $/, '');
+    $('bigTemp').textContent = toUnit(current.temperature_2m);
+    $('bigUnit').innerHTML = `&deg;${unit.toUpperCase()}`;
+
+    const cond = mapWeather(current.weather_code, current.is_day);
+    $('condIcon').className = `fa-solid ${cond.icon}`;
+    $('condText').textContent = cond.text;
+
+    $('feelsLike').textContent = `${toUnit(current.apparent_temperature)}${ul}`;
+    $('humidity').textContent = `${current.relative_humidity_2m}%`;
+    $('wind').textContent = `${current.wind_speed_10m} km/h`;
+    $('pressure').textContent = `${Math.round(current.surface_pressure)} hPa`;
+
+    // Update the sky and particles
+    isDay = current.is_day;
+    currentCondition = cond.theme;
+    setSky(cond.theme, !!current.is_day);
+
+    // Hourly
+    const hEl = $('hourlyScroll'); hEl.innerHTML = '';
+    const now = new Date();
+    const idx = hourly.time.findIndex(t => new Date(t) > now) || 0;
+    for (let i = idx; i < idx + 8; i++) {
+        if (!hourly.time[i]) break;
+        const t = new Date(hourly.time[i]).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        const ic = mapWeather(hourly.weather_code[i], 1).icon;
+        const div = document.createElement('div'); div.className = 'hourly-item';
+        div.innerHTML = `<span class="hourly-time">${t}</span><i class="fa-solid ${ic} hourly-icon"></i><span class="hourly-temp">${toUnit(hourly.temperature_2m[i])}&deg;</span>`;
+        hEl.appendChild(div);
+    }
+
+    // Daily
+    const dEl = $('dailyList'); dEl.innerHTML = '';
+    for (let i = 1; i <= 5; i++) {
+        if (!daily.time[i]) break;
+        const day = new Date(daily.time[i]).toLocaleDateString('en-US', { weekday: 'long' });
+        const ic = mapWeather(daily.weather_code[i], 1).icon;
+        const row = document.createElement('div'); row.className = 'daily-row';
+        row.innerHTML = `<span class="daily-day">${day}</span><i class="fa-solid ${ic} daily-icon"></i><div class="daily-temps"><span class="daily-hi">${toUnit(daily.temperature_2m_max[i])}&deg;</span><span class="daily-lo">${toUnit(daily.temperature_2m_min[i])}&deg;</span></div>`;
+        dEl.appendChild(row);
+    }
+}
+
+// Unit toggle
+document.querySelectorAll('.unit-btn').forEach(btn => {
+    btn.addEventListener('click', e => {
+        const u = e.target.dataset.unit; if (u === unit) return;
+        unit = u;
+        document.querySelectorAll('.unit-btn').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        render();
+    });
+});
+
+// WMO weather code mapping
+function mapWeather(code, dayFlag) {
+    let text = 'Clear sky', icon = dayFlag ? 'fa-sun' : 'fa-moon', theme = 'clear';
+    if (code === 0) { /* defaults */ }
+    else if (code <= 3) { text = code === 3 ? 'Overcast' : 'Partly cloudy'; icon = dayFlag ? 'fa-cloud-sun' : 'fa-cloud-moon'; if (code === 3) icon = 'fa-cloud'; theme = 'clouds'; }
+    else if (code === 45 || code === 48) { text = 'Fog'; icon = 'fa-smog'; theme = 'clouds'; }
+    else if (code >= 51 && code <= 67) { text = 'Rain'; icon = 'fa-cloud-rain'; theme = 'rain'; }
+    else if (code >= 71 && code <= 77) { text = 'Snow'; icon = 'fa-snowflake'; theme = 'snow'; }
+    else if (code >= 80 && code <= 82) { text = 'Showers'; icon = 'fa-cloud-showers-heavy'; theme = 'rain'; }
+    else if (code >= 95) { text = 'Thunderstorm'; icon = 'fa-bolt'; theme = 'thunder'; }
+    return { text, icon, theme };
+}
+
+document.addEventListener('DOMContentLoaded', () => renderRecent(getRecent()));
+</script>
 </body>
 </html>
