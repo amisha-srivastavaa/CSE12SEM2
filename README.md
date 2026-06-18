@@ -1,58 +1,67 @@
-# B.Tech 2nd Semester Web Design Portfolio 
+# 🚀 B.Tech 2nd Semester Web Design Portfolio
 
-Hi there! Welcome to my repository for the 2nd Semester Web Design course. 
+Welcome to my **Web Design Portfolio** repository! This project serves as a complete showcase of everything I've learned during my 2nd Semester Web Design course — spanning from raw HTML/CSS and vanilla JavaScript all the way to modern React applications and Spring Boot REST APIs.
 
-I created this repo to showcase everything I've learned over the semester, from basic HTML and CSS styling all the way up to building full-stack applications with React and Spring Boot. Instead of just doing the bare minimum, I tried to make each project and experiment look professional and act like real-world apps.
-
----
-
-##  What's Inside?
-
-This repository is split into two main parts: my **4 Major Projects** and the **12 Core Experiments** required for the coursework.
-
-You can easily browse through all of them by simply opening `index.html` in your browser. It acts as a landing page for the whole repo.
-
-### The 12 Core Experiments
-These folders cover specific topics we learned in class:
-
-1. **`exp1-bootstrap-grid`**: Testing out the Bootstrap 5 grid system.
-2. **`exp2-bootstrap-components`**: A mini "TechStore" using Bootstrap cards and modals.
-3. **`exp3-tailwind-fitlife`**: Trying out Tailwind CSS for a mobile-first fitness landing page.
-4. **`exp4-js-marks-calculator`**: Using JavaScript loops and conditions to calculate student grades.
-5. **`exp5-js-employee-records`**: Filtering and managing arrays of JS objects for a fake company.
-6. **`exp6-js-events`**: Playing around with DOM manipulation (`onclick`, `onmouseover`, etc.).
-7. **`exp7-react-student-props`**: My first React app! Passing data around using Props.
-8. **`exp8-react-usestate-counter`**: Getting the hang of React state with a simple counter app.
-9. **`exp9-react-form-validation`**: A registration form with client-side React validation.
-10. **`exp10-java-bank-oop`**: A pure Java console app demonstrating Inheritance and Abstraction.
-11. **`exp11-springboot-basic-api`**: Setting up my very first Spring Boot REST API.
-12. **`exp12-springboot-crud-employee`**: A full CRUD backend using Spring Boot, Spring Data JPA, and an H2 database.
-
-### The 4 Major Projects & Capstone
-
-
-0. **`functional-project`**: **Capstone:** A minimal, utilitarian weather dashboard utilizing the Open-Meteo API and vanilla JavaScript for dynamic DOM updates.
-1. **`bootstrap-website`**: A corporate landing page heavily utilizing Bootstrap 5.
-2. **`javascript-projects`**: Vanilla JS apps including a To-Do list and an API fetcher.
-3. **`react-app`**: A complete Student Dashboard built as a Single Page Application using React + Vite.
-4. **`springboot-api`**: A robust backend REST API for managing students, built with Java and Spring Boot.
+You can view the live portfolio here:
+👉 **[Live Portfolio Homepage](https://amisha-srivastavaa.github.io/CSE12SEM2/)**
 
 ---
 
-##  How to Run This Stuff
+## 🌟 What's Inside?
 
-**For the HTML/JS/CSS experiments:**
-Just double-click the `index.html` file in any folder (or the main root folder) to view it in your browser. No server needed.
+The repository is structured around my **12 Core Experiments** and **5 Major Projects**, wrapped in a premium, responsive, glassmorphism-styled portfolio homepage.
 
-**For the React apps:**
-1. Open a terminal in the specific app's folder.
-2. Run `npm install` to grab the dependencies.
-3. Run `npm run dev` to start the local Vite server.
+### 🏆 Capstone Project: Animated Weather Dashboard
+Located in `functional-project/`, this is my flagship vanilla JS application.
+* **Live Canvas Wallpaper:** A fully interactive, math-driven HTML5 `<canvas>` background that renders dynamic weather conditions (drifting clouds, twinkling stars, rain, snow, lightning, and a glowing sun/moon).
+* **Live API Data:** Uses the Open-Meteo API for real-time geolocation and weather forecasting.
+* **Glassmorphism UI:** Features a sleek frosted-glass interface that adapts smoothly to mobile devices.
+* **Day/Night Cycle:** The app automatically calculates sky gradients, celestial body angles, and color palettes based on the local time and weather code.
 
-**For the Spring Boot APIs:**
-1. Make sure you have Java and Maven installed.
-2. Open a terminal in the specific project folder.
-3. Run `mvn spring-boot:run` (or `./mvnw spring-boot:run`). The server usually starts on `localhost:8080`.
+### 🧪 The 12 Core Experiments
+A progressive learning journey through modern web tech:
+1. **Bootstrap Grid** — Mastering responsive 12-column layouts
+2. **Bootstrap Components** — Modals, carousels, and interactive UI elements
+3. **Tailwind FitLife** — Utility-first CSS mobile-first landing page
+4. **JS Marks Calculator** — Algorithms, arrays, and DOM manipulation
+5. **JS Employee Records** — JavaScript object mapping and array filtering
+6. **JS Events & DOM** — Event delegation, bubbling, and dynamic DOM injection
+7. **React Props** — Component architecture and data flow
+8. **React useState** — Functional component state management
+9. **React Form Validation** — Controlled components and real-time error handling
+10. **Java OOP Bank** — Console application demonstrating Inheritance, Polymorphism, and Abstraction
+11. **Spring Boot Basic** — Hello World REST API setup
+12. **Spring Boot CRUD** — Full database-backed REST API with Spring Data JPA and Hibernate
+
+### 💻 The 4 Major Projects
+1. **Corporate Landing Page (`bootstrap-website`)** — Responsive, multi-section agency site.
+2. **Interactive JS Features (`javascript-projects`)** — To-Do lists and asynchronous API fetchers.
+3. **Student Dashboard (`react-app`)** — A complete React SPA built with Vite.
+4. **Student Management API (`springboot-api`)** — A robust backend with validation and Swagger UI.
 
 ---
 
+## 🛠️ How to Run Locally
+
+### Front-End (HTML/JS/CSS)
+No build tools required. Simply double-click `index.html` in the root directory to open the portfolio homepage, or navigate into any experiment folder and open its respective HTML file in your browser.
+
+### React Applications (`exp7` to `exp9`, `react-app`)
+These are built with Vite.
+```bash
+cd react-app
+npm install
+npm run dev
+```
+
+### Spring Boot APIs (`exp11`, `exp12`, `springboot-api`)
+Requires Java 17+ and Maven.
+```bash
+cd springboot-api
+mvn spring-boot:run
+```
+The server will start on `localhost:8080`.
+
+---
+
+*Built with ❤️ by Amisha Srivastava — CSE 2nd Semester 2026*
