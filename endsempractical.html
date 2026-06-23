@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Calculator</title>
+
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #74ebd5, #9face6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container{
+            background: rgb(212, 125, 125);
+            padding: 30px;
+            width: 400px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        h2{
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input{
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        button{
+            width: 95%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background-color: #d68ee4;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover{
+            background-color: #69aed6;
+        }
+
+        #result{
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: #f4f4f4;
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Marks & Grade Calculator</h2>
+
+    <input type="number" id="m1" placeholder="Subject 1 Marks">
+    <input type="number" id="m2" placeholder="Subject 2 Marks">
+    <input type="number" id="m3" placeholder="Subject 3 Marks">
+    <input type="number" id="m4" placeholder="Subject 4 Marks">
+    <input type="number" id="m5" placeholder="Subject 5 Marks">
+
+    <button onclick="calculateGrade()">Calculate Result</button>
+
+    <div id="result"></div>
+</div>
+
+<script>
+function calculateGrade()
+{
+    let m1 = Number(document.getElementById("m1").value);
+    let m2 = Number(document.getElementById("m2").value);
+    let m3 = Number(document.getElementById("m3").value);
+    let m4 = Number(document.getElementById("m4").value);
+    let m5 = Number(document.getElementById("m5").value);
+
+    let total = m1 + m2 + m3 + m4 + m5;
+    let average = total / 5;
+
+    let grade;
+
+    if(average >= 90)
+        grade = "A";
+    else if(average >= 75)
+        grade = "B";
+    else if(average >= 60)
+        grade = "C";
+    else if(average >= 40)
+        grade = "D";
+    else
+        grade = "Fail";
+
+    document.getElementById("result").innerHTML =
+        "Total Marks: " + total + "/500 <br>" +
+        "Average: " + average.toFixed(2) + "% <br>" +
+        "Grade: " + grade;
+}
+</script>
+
+</body>
+</html>
